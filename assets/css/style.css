@@ -10,30 +10,49 @@
    DESIGN TOKENS & SYSTEM VARIABLES
    -------------------------------------------------------------------------- */
 :root {
-  /* Institutional Royal College Palette */
-  --c-navy-950: #050e18;
-  --c-navy-900: #071524;
-  --c-navy-850: #0b1e33;
-  --c-navy-800: #112b48;
-  --c-navy-700: #1a3c63;
-  --c-navy-600: #244e7e;
+  /* ==========================================================================
+     BRAND IDENTITY SYSTEM TOKENS (IMA UK & EUROPE)
+     Extracted directly from official logo identity:
+     - Primary Brand Navy:  #00336a (Deep British Medical Navy)
+     - Secondary Brand Teal: #069e85 (Vivid Clinical Emerald / Medical Teal)
+     ========================================================================== */
+
+  /* Primary Brand Navy & Sapphire Palette */
+  --c-navy-950: #031020;
+  --c-navy-900: #002855;
+  --c-navy-850: #00336a;
+  --c-navy-800: #004080;
+  --c-navy-700: #0d549b;
+  --c-navy-600: #1b6cb8;
   
-  --c-gold-700: #a47e18;
-  --c-gold-600: #c59b27;
-  --c-gold-500: #d4af37;
-  --c-gold-400: #e5c35b;
-  --c-gold-100: #fbf6ea;
-  --c-gold-50:  #fdfbf5;
+  /* Secondary Brand Teal & Emerald Palette */
+  --c-teal-700: #047864;
+  --c-teal-600: #069e85;
+  --c-teal-500: #0ba98f;
+  --c-teal-400: #1dd1a1;
+  --c-teal-300: #5eead4;
+  --c-teal-100: #e0f7f3;
+  --c-teal-50:  #f0faf8;
 
-  --c-bg-page: #fcfaf7;
+  /* Backward-compatible token mapping for legacy --c-gold-* variables */
+  --c-gold-700: var(--c-teal-700);
+  --c-gold-600: var(--c-teal-600);
+  --c-gold-500: var(--c-teal-500);
+  --c-gold-400: var(--c-teal-400);
+  --c-gold-100: var(--c-teal-100);
+  --c-gold-50:  var(--c-teal-50);
+
+  /* Modern Crisp Neutral & Clinical Surface Tokens */
+  --c-bg-page: #f8fafb;
   --c-bg-card: #ffffff;
-  --c-bg-subtle: #f5f2eb;
-  --c-border: #e3ded5;
-  --c-border-gold: rgba(197, 155, 39, 0.4);
+  --c-bg-subtle: #eff6f8;
+  --c-border: #dbe4ea;
+  --c-border-teal: rgba(6, 158, 133, 0.35);
+  --c-border-gold: rgba(6, 158, 133, 0.35);
 
-  --c-text-main: #1f2937;
-  --c-text-muted: #4b5563;
-  --c-text-light: #6b7280;
+  --c-text-main: #0c1c2c;
+  --c-text-muted: #3a5068;
+  --c-text-light: #647a92;
   
   --font-serif: "Playfair Display", Georgia, Cambria, "Times New Roman", serif;
   --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -48,11 +67,11 @@
   --radius-xl: 16px;
   --radius-full: 9999px;
 
-  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px -1px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 6px -1px rgba(7, 21, 36, 0.08), 0 2px 4px -2px rgba(7, 21, 36, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(7, 21, 36, 0.1), 0 4px 6px -4px rgba(7, 21, 36, 0.08);
-  --shadow-xl: 0 20px 25px -5px rgba(7, 21, 36, 0.15), 0 8px 10px -6px rgba(7, 21, 36, 0.1);
+  --shadow-xs: 0 1px 2px 0 rgba(0, 40, 85, 0.05);
+  --shadow-sm: 0 1px 3px 0 rgba(0, 40, 85, 0.08), 0 1px 2px -1px rgba(0, 40, 85, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 40, 85, 0.08), 0 2px 4px -2px rgba(0, 40, 85, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 40, 85, 0.1), 0 4px 6px -4px rgba(0, 40, 85, 0.08);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 40, 85, 0.15), 0 8px 10px -6px rgba(0, 40, 85, 0.1);
 
   --touch-target-min: 44px;
 }
@@ -223,7 +242,7 @@ svg {
   background-color: var(--c-navy-950);
   color: #d1d5db;
   font-size: clamp(0.7rem, 1.2vw, 0.78rem);
-  border-bottom: 1px solid rgba(197, 155, 39, 0.35);
+  border-bottom: 1px solid rgba(6, 158, 133, 0.3);
   padding: 0.5rem 0;
   position: relative;
   z-index: 60;
@@ -565,38 +584,40 @@ svg {
 }
 
 .btn-gold {
-  background-color: var(--c-gold-600);
-  color: var(--c-navy-950);
-  border-color: var(--c-gold-500);
+  background-color: var(--c-teal-600);
+  color: #ffffff;
+  border-color: var(--c-teal-700);
   box-shadow: var(--shadow-sm);
 }
 
 .btn-gold:hover {
-  background-color: var(--c-gold-500);
+  background-color: var(--c-teal-700);
+  color: #ffffff;
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
 
 .btn-navy {
   background-color: var(--c-navy-900);
-  color: var(--c-gold-400);
-  border-color: var(--c-gold-600);
+  color: #ffffff;
+  border-color: var(--c-teal-600);
 }
 
 .btn-navy:hover {
   background-color: var(--c-navy-800);
   color: #ffffff;
+  border-color: var(--c-teal-500);
 }
 
 .btn-outline {
   background-color: transparent;
   color: var(--c-navy-900);
-  border-color: var(--c-navy-800);
+  border-color: var(--c-navy-850);
 }
 
 .btn-outline:hover {
   background-color: var(--c-navy-900);
-  color: var(--c-gold-400);
+  color: #ffffff;
 }
 
 .btn-white {
@@ -606,7 +627,8 @@ svg {
 }
 
 .btn-white:hover {
-  background: var(--c-gold-100);
+  background: var(--c-teal-100);
+  color: var(--c-teal-700);
 }
 
 .btn-block {
@@ -632,15 +654,15 @@ svg {
 }
 
 .badge-gold {
-  background-color: var(--c-gold-100);
-  color: var(--c-gold-700);
-  border: 1px solid var(--c-gold-500);
+  background-color: var(--c-teal-100);
+  color: var(--c-teal-700);
+  border: 1px solid var(--c-teal-500);
 }
 
 .badge-navy {
   background-color: var(--c-navy-850);
-  color: var(--c-gold-400);
-  border: 1px solid rgba(197, 155, 39, 0.4);
+  color: var(--c-teal-400);
+  border: 1px solid rgba(6, 158, 133, 0.4);
 }
 
 /* --------------------------------------------------------------------------
@@ -773,7 +795,7 @@ svg {
 
 .hero-poster-frame {
   background: var(--c-navy-850);
-  border: 1px solid rgba(197, 155, 39, 0.4);
+  border: 1px solid rgba(6, 158, 133, 0.4);
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-xl);
@@ -1003,7 +1025,7 @@ svg {
   border-color: var(--c-gold-600);
   outline: 2px solid var(--c-gold-500);
   outline-offset: 1px;
-  box-shadow: 0 0 0 3px rgba(197, 155, 39, 0.15);
+  box-shadow: 0 0 0 3px rgba(6, 158, 133, 0.18);
 }
 
 .form-note {
