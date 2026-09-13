@@ -1,0 +1,6 @@
+# robots.txt for Iraqi Medical Association UK & Europe
+User-agent: *
+Allow: /
+
+# Fast sitemap discovery for Google, Bing, and AI search engines
+Sitemap: https://www.iraqimedicalassociation-uk-eu.com/sitemap.xml

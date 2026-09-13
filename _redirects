@@ -1,0 +1,14 @@
+# Cloudflare Pages 301 Permanent Redirects for Legacy Squarespace URLs
+
+/new-page             /education.html     301
+/new-page-1           /gallery.html       301
+/new-page-2           /news.html          301
+/services-store       /membership.html    301
+/our-members          /about.html         301
+/upcoming-events      /agm2025.html       301
+/about                /about.html         301
+/posters              /posters.html       301
+/the-gallery          /gallery.html       301
+/useful-links         /useful-links.html  301
+/contact              /contact.html       301
+/cart                 /membership.html    301

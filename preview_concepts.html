@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IMA UK & Europe | Live Design Concept Showcase</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome for medical & UI icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <!-- Google Fonts: Serif (Playfair/Merriweather) & Modern Sans (Plus Jakarta Sans, Outfit, Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            // Concept 1: Institutional Heritage
+            c1navy: { 900: '#071524', 800: '#0b1e33', 700: '#112b48', 600: '#1b3c63' },
+            c1gold: { 500: '#d4af37', 600: '#c59b27', 700: '#9e7b1d' },
+            
+            // Concept 2: Humanitarian & Community
+            c2teal: { 900: '#064e3b', 800: '#0f766e', 700: '#0d9488', 600: '#14b8a6', 50: '#f0fdfa' },
+            c2cyan: { 600: '#0284c7', 500: '#0ea5e9' },
+            
+            // Concept 3: Pan-European Hub
+            c3slate: { 900: '#0f172a', 800: '#1e293b', 700: '#334155' },
+            c3blue: { 600: '#2563eb', 700: '#1d4ed8' },
+            c3mint: { 500: '#10b981', 600: '#059669' }
+          },
+          fontFamily: {
+            serif1: ['"Playfair Display"', 'serif'],
+            merriweather: ['"Merriweather"', 'serif'],
+            sans1: ['"Plus Jakarta Sans"', 'sans-serif'],
+            outfit: ['"Outfit"', 'sans-serif'],
+            inter: ['"Inter"', 'sans-serif'],
+            cinzel: ['"Cinzel"', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Smooth tab switching */
+    .concept-view {
+      display: none;
+      animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .concept-view.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Sticky Controller Glass effect */
+    .glass-bar {
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-900 font-sans1 antialiased selection:bg-amber-200 selection:text-slate-900">
+
+  <!-- ======================================================== -->
+  <!-- TOP CONTROLLER / CONCEPT SWITCHER TOOLBAR -->
+  <!-- ======================================================== -->
+  <header class="glass-bar sticky top-0 z-50 px-4 py-2.5 shadow-2xl text-white">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+      
+      <!-- Brand & Status -->
+      <div class="flex items-center gap-3">
+        <img src="downloaded_site/images/WhatsApp_Image_2025-07-27_at_18.50.18-removebg-preview.png" alt="IMA Logo" class="h-10 w-10 object-contain bg-white/10 rounded-full p-1" />
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-bold tracking-wide text-sm md:text-base text-white">IMA UK & Europe</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Live Test</span>
+          </div>
+          <p class="text-[11px] text-slate-300">Compare 3 distinct NGO website directions and select your favorite</p>
+        </div>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="flex items-center bg-slate-800/80 p-1 rounded-xl border border-slate-700/60 shadow-inner">
+        <button onclick="switchConcept(1)" id="btn-tab-1" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 flex items-center gap-2 bg-amber-500 text-slate-950 shadow-md">
+          <i class="fa-solid fa-landmark"></i>
+          <span>1. Royal College Heritage</span>
+        </button>
+        <button onclick="switchConcept(2)" id="btn-tab-2" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white">
+          <i class="fa-solid fa-hand-holding-heart"></i>
+          <span>2. Humanitarian & Community</span>
+        </button>
+        <button onclick="switchConcept(3)" id="btn-tab-3" class="tab-btn px-3.5 py-1.5 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 flex items-center gap-2 text-slate-300 hover:text-white">
+          <i class="fa-solid fa-globe"></i>
+          <span>3. European Medical Hub</span>
+        </button>
+      </div>
+
+      <!-- Quick Action / Selection confirmation -->
+      <div class="hidden lg:flex items-center gap-2">
+        <button onclick="alertChosen()" class="px-3.5 py-1.5 text-xs font-bold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition-all shadow-sm flex items-center gap-1.5">
+          <i class="fa-solid fa-check-circle"></i>
+          <span>Confirm Selection</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- CONCEPT 1: THE ROYAL COLLEGE & INSTITUTIONAL HERITAGE   -->
+  <!-- ======================================================== -->
+  <main id="concept-1" class="concept-view active bg-[#fdfbf7] text-slate-800">
+    
+    <!-- Top Announcement & Verification Strip -->
+    <div class="bg-c1navy-900 text-slate-300 text-xs border-b border-c1gold-600/30 py-2 px-4">
+      <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+        <div class="flex items-center gap-4">
+          <span class="inline-flex items-center gap-1.5 text-c1gold-500 font-medium">
+            <i class="fa-solid fa-shield-halved"></i> Official UK Non-Profit Medical Association (Est. 1999)
+          </span>
+          <span class="hidden md:inline text-slate-500">|</span>
+          <span class="hidden md:inline text-slate-300">
+            <i class="fa-solid fa-calendar-check mr-1 text-c1gold-500"></i> AGM 2025: London & Hybrid Europe
+          </span>
+        </div>
+        <div class="flex items-center gap-4 text-[11px]">
+          <a href="https://www.facebook.com/IMAUK" target="_blank" class="hover:text-c1gold-500 transition"><i class="fa-brands fa-facebook"></i> IMAUK</a>
+          <a href="https://www.instagram.com/iraqimedicalassociation.uk.eu/#" target="_blank" class="hover:text-c1gold-500 transition"><i class="fa-brands fa-instagram"></i> Instagram</a>
+          <a href="https://x.com/ima_uk" target="_blank" class="hover:text-c1gold-500 transition"><i class="fa-brands fa-x-twitter"></i> @ima_uk</a>
+          <a href="https://ima-uk.forumotion.com/register" target="_blank" class="hover:text-c1gold-500 transition"><i class="fa-solid fa-comments"></i> Forum</a>
+          <span class="text-c1gold-500/80 font-serif">العربية | English</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formal Academic Navigation -->
+    <nav class="bg-white border-b border-slate-200 shadow-sm sticky top-[57px] z-40">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        
+        <!-- Crest & Title -->
+        <div class="flex items-center gap-4">
+          <img src="downloaded_site/images/WhatsApp_Image_2025-07-27_at_18.50.18-removebg-preview.png" alt="IMA Crest" class="h-16 w-auto object-contain" />
+          <div>
+            <div class="font-serif1 text-lg md:text-xl font-bold text-c1navy-900 tracking-tight leading-tight">
+              Iraqi Medical Association
+            </div>
+            <div class="text-xs uppercase tracking-widest text-c1gold-600 font-semibold">
+              United Kingdom & Europe
+            </div>
+            <div class="text-[11px] text-slate-400 font-serif italic">
+              الجمعية الطبية العراقية في المملكة المتحدة وأوروبا
+            </div>
+          </div>
+        </div>
+
+        <!-- Academic Nav Links -->
+        <div class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-700">
+          <a href="#c1-about" class="hover:text-c1gold-600 transition border-b-2 border-transparent hover:border-c1gold-600 pb-1">Governance & Mission</a>
+          <a href="#c1-agm" class="hover:text-c1gold-600 transition border-b-2 border-transparent hover:border-c1gold-600 pb-1">AGM 2025 Conference</a>
+          <a href="#c1-archive" class="hover:text-c1gold-600 transition border-b-2 border-transparent hover:border-c1gold-600 pb-1">Historical Archive</a>
+          <a href="#c1-posters" class="hover:text-c1gold-600 transition border-b-2 border-transparent hover:border-c1gold-600 pb-1">Scientific Posters</a>
+          <a href="#c1-advisory" class="hover:text-c1gold-600 transition border-b-2 border-transparent hover:border-c1gold-600 pb-1">Public Advisories</a>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="flex items-center gap-3">
+          <a href="#c1-register" class="px-4 py-2 text-xs md:text-sm font-serif font-bold uppercase tracking-wider bg-c1navy-900 hover:bg-c1navy-800 text-c1gold-500 border border-c1gold-600/60 rounded shadow transition">
+            Member Registration
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Concept 1 Hero Section -->
+    <section class="relative bg-gradient-to-b from-c1navy-900 via-c1navy-800 to-c1navy-900 text-white py-16 md:py-24 px-4 overflow-hidden border-b-4 border-c1gold-600">
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#c59b27_1px,transparent_1px)] [background-size:24px_24px]"></div>
+      
+      <div class="max-w-7xl mx-auto relative z-10 grid md:grid-cols-12 gap-10 items-center">
+        
+        <div class="md:col-span-7 space-y-6 text-left">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded border border-c1gold-600/40 bg-c1gold-600/10 text-c1gold-500 text-xs font-semibold uppercase tracking-widest">
+            <i class="fa-solid fa-award"></i> The Royal Standard of Collegial Excellence
+          </div>
+
+          <h1 class="font-serif1 text-3xl md:text-5xl font-bold leading-tight text-white">
+            Uniting Iraqi Medical Leaders Across the <span class="text-c1gold-500 italic">UK & Europe</span>
+          </h1>
+
+          <p class="font-merriweather text-slate-300 text-sm md:text-base leading-relaxed max-w-2xl font-light">
+            Founded to foster scientific advancement, collegial solidarity, and continuous medical education. We represent NHS consultants, clinical specialists, academic researchers, and junior fellows across Great Britain and continental Europe.
+          </p>
+
+          <!-- Dual Institutional Buttons -->
+          <div class="flex flex-wrap gap-4 pt-3">
+            <a href="#c1-agm" class="px-6 py-3 bg-c1gold-600 hover:bg-c1gold-500 text-c1navy-900 font-bold font-serif text-sm uppercase tracking-wider rounded shadow-lg transition duration-150 flex items-center gap-2">
+              <i class="fa-solid fa-scroll"></i> AGM 2025 Official Details
+            </a>
+            <a href="#c1-register" class="px-6 py-3 bg-transparent hover:bg-white/10 text-white font-medium text-sm border border-slate-400/60 rounded shadow transition flex items-center gap-2">
+              <i class="fa-solid fa-user-doctor"></i> Qualified Doctor Enrolment
+            </a>
+          </div>
+
+          <!-- Institutional Trust Credentials -->
+          <div class="pt-6 border-t border-slate-700/60 grid grid-cols-3 gap-4 text-center md:text-left">
+            <div>
+              <div class="font-serif text-xl md:text-2xl font-bold text-c1gold-500">1999</div>
+              <div class="text-[11px] text-slate-400 uppercase tracking-wider">Founded in the UK</div>
+            </div>
+            <div>
+              <div class="font-serif text-xl md:text-2xl font-bold text-c1gold-500">25+</div>
+              <div class="text-[11px] text-slate-400 uppercase tracking-wider">Annual Scientific AGMs</div>
+            </div>
+            <div>
+              <div class="font-serif text-xl md:text-2xl font-bold text-c1gold-500">Free</div>
+              <div class="text-[11px] text-slate-400 uppercase tracking-wider">Certified Membership</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Official AGM 2025 Poster Frame -->
+        <div class="md:col-span-5">
+          <div class="relative bg-c1navy-800 p-2 rounded-xl border-2 border-c1gold-600/60 shadow-2xl">
+            <div class="overflow-hidden rounded-lg">
+              <img src="downloaded_site/images/AGM_2025__2.jpg" alt="AGM 2025 Official Poster" class="w-full h-auto object-cover hover:scale-105 transition duration-500" />
+            </div>
+            <div class="p-4 text-center bg-c1navy-900/90 mt-2 rounded-lg border border-c1gold-600/30">
+              <div class="text-xs uppercase tracking-widest text-c1gold-500 font-bold">Official Event Notice</div>
+              <h3 class="font-serif text-base font-bold text-white mt-1">Annual General Meeting & Conference 2025</h3>
+              <p class="text-xs text-slate-300 mt-1">Clinical Symposia, Junior Doctor Workshops & Gala Dinner</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Official Anti-Fraud Advisory Banner (Crucial Trust Signal from Audit) -->
+    <section id="c1-advisory" class="bg-amber-50 border-y border-amber-200 py-4 px-4">
+      <div class="max-w-7xl mx-auto flex items-start md:items-center gap-3 text-amber-900">
+        <i class="fa-solid fa-triangle-exclamation text-xl text-amber-700 mt-0.5 md:mt-0"></i>
+        <div class="text-xs md:text-sm">
+          <strong class="font-bold">Official Anti-Fraud Notice & Member Advisory:</strong>
+          Please be advised that the Iraqi Medical Association UK & Europe communicates exclusively via our verified domains and official social channels. Free membership registration is conducted only through our official website portal.
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: President's Address & Executive Committee -->
+    <section id="c1-about" class="py-16 px-4 max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-xs font-bold text-c1gold-600 uppercase tracking-widest">Leadership & Governance</span>
+        <h2 class="font-serif1 text-3xl font-bold text-c1navy-900 mt-2">Executive Committee & Academic Board</h2>
+        <div class="w-20 h-1 bg-c1gold-600 mx-auto mt-3"></div>
+        <p class="text-slate-600 text-sm mt-4 font-merriweather font-light leading-relaxed">
+          Led by senior NHS consultants and distinguished medical faculty committed to ethical governance, peer mentoring, and transatlantic healthcare ties.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Committee Member 1 -->
+        <div class="bg-white border border-slate-200 rounded-lg p-6 shadow-sm hover:shadow-md transition text-center">
+          <div class="w-24 h-24 mx-auto rounded-full bg-slate-100 border-2 border-c1gold-600 p-1 mb-4">
+            <img src="downloaded_site/images/WhatsApp_Image_2025-07-27_at_18.50.18-removebg-preview.png" alt="Officer" class="w-full h-full object-contain" />
+          </div>
+          <h4 class="font-serif text-lg font-bold text-c1navy-900">Senior Executive Board</h4>
+          <p class="text-xs font-semibold text-c1gold-600 uppercase tracking-wider mt-1">Consultants & Fellows (FRCP / FRCS)</p>
+          <p class="text-xs text-slate-500 mt-3 font-light leading-relaxed">
+            Representing Iraqi medical practitioners throughout England, Scotland, Wales, Northern Ireland, and continental Europe.
+          </p>
+        </div>
+
+        <!-- Committee Member 2 -->
+        <div class="bg-white border border-slate-200 rounded-lg p-6 shadow-sm hover:shadow-md transition text-center">
+          <div class="w-24 h-24 mx-auto rounded-full bg-slate-100 border-2 border-c1gold-600 p-1 mb-4">
+            <img src="downloaded_site/images/ims_union__1_.jpeg" alt="Historical Committee" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <h4 class="font-serif text-lg font-bold text-c1navy-900">Scientific & Academic Council</h4>
+          <p class="text-xs font-semibold text-c1gold-600 uppercase tracking-wider mt-1">CME & Continuing Education</p>
+          <p class="text-xs text-slate-500 mt-3 font-light leading-relaxed">
+            Organizing accredited clinical lectures, poster symposiums, and peer review for international medical publications.
+          </p>
+        </div>
+
+        <!-- Committee Member 3 -->
+        <div class="bg-white border border-slate-200 rounded-lg p-6 shadow-sm hover:shadow-md transition text-center">
+          <div class="w-24 h-24 mx-auto rounded-full bg-slate-100 border-2 border-c1gold-600 p-1 mb-4">
+            <img src="downloaded_site/images/uima.jpeg" alt="IMG Committee" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <h4 class="font-serif text-lg font-bold text-c1navy-900">Trainee & IMG Mentorship Bureau</h4>
+          <p class="text-xs font-semibold text-c1gold-600 uppercase tracking-wider mt-1">GMC Registration & Training</p>
+          <p class="text-xs text-slate-500 mt-3 font-light leading-relaxed">
+            Dedicated guidance for doctors navigating GMC sponsorship, PLAB examinations, and European medical credentialing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section: Archival 25-Year Heritage -->
+    <section id="c1-archive" class="bg-c1navy-900 text-white py-16 px-4">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-12 gap-10 items-center">
+          <div class="md:col-span-5">
+            <div class="border-4 border-c1gold-600/40 rounded-lg overflow-hidden shadow-2xl">
+              <img src="downloaded_site/images/ima_aug_1999.jpeg" alt="Historical 1999 Assembly" class="w-full h-auto object-cover" />
+            </div>
+            <p class="text-[11px] text-slate-400 text-center mt-2 italic font-serif">Historical archive photograph from our inaugural London assembly, August 1999.</p>
+          </div>
+          <div class="md:col-span-7 space-y-4">
+            <span class="text-xs font-bold text-c1gold-500 uppercase tracking-widest">Our Enduring Legacy</span>
+            <h3 class="font-serif1 text-3xl font-bold">More Than Two Decades of Dedicated Medical Solidarity</h3>
+            <p class="font-merriweather text-slate-300 text-sm font-light leading-relaxed">
+              Since 1999, the Iraqi Medical Association UK & Europe has gathered clinicians, surgeons, academics, and researchers. Through major historical shifts, we have remained an unwavering pillar for Iraqi doctors serving the National Health Service and healthcare systems across Europe.
+            </p>
+            <div class="pt-2">
+              <a href="#c1-register" class="inline-flex items-center gap-2 text-c1gold-500 font-bold hover:text-c1gold-400 transition text-sm">
+                Explore The Complete Archival Collection <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formal Membership Registration Form -->
+    <section id="c1-register" class="py-16 px-4 max-w-4xl mx-auto">
+      <div class="bg-white border border-slate-300 rounded-xl p-8 shadow-lg">
+        <div class="text-center mb-8">
+          <span class="text-xs font-bold text-c1gold-600 uppercase tracking-widest">Professional Enrolment</span>
+          <h3 class="font-serif1 text-2xl md:text-3xl font-bold text-c1navy-900 mt-1">Official Member Registration</h3>
+          <p class="text-xs text-slate-500 mt-2">Registration is 100% free for qualified medical practitioners, dental surgeons, and researchers across the UK & Europe.</p>
+        </div>
+
+        <form onsubmit="event.preventDefault(); alert('Demo: Concept 1 registration form submitted!');" class="space-y-4">
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Full Legal Name (with titles)</label>
+              <input type="text" placeholder="Dr. Sarah Al-Hashimi, FRCP" class="w-full text-sm px-3.5 py-2.5 rounded border border-slate-300 focus:outline-none focus:border-c1navy-900" required />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Professional Email</label>
+              <input type="email" placeholder="name@nhs.net / university.edu" class="w-full text-sm px-3.5 py-2.5 rounded border border-slate-300 focus:outline-none focus:border-c1navy-900" required />
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Country of Practice</label>
+              <select class="w-full text-sm px-3 py-2.5 rounded border border-slate-300 focus:outline-none focus:border-c1navy-900">
+                <option>United Kingdom (NHS / Private)</option>
+                <option>Ireland</option>
+                <option>Germany</option>
+                <option>France / Switzerland</option>
+                <option>Other European Country</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Clinical Specialty</label>
+              <input type="text" placeholder="e.g. Cardiology, Anaesthetics" class="w-full text-sm px-3 py-2.5 rounded border border-slate-300 focus:outline-none focus:border-c1navy-900" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">GMC / Medical Reg No.</label>
+              <input type="text" placeholder="GMC 7 Digits (Optional)" class="w-full text-sm px-3 py-2.5 rounded border border-slate-300 focus:outline-none focus:border-c1navy-900" />
+            </div>
+          </div>
+
+          <button type="submit" class="w-full mt-4 py-3 bg-c1navy-900 hover:bg-c1navy-800 text-c1gold-500 font-serif font-bold text-sm uppercase tracking-wider rounded transition shadow-md">
+            Submit Application for Certified Membership
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Concept 1 Footer -->
+    <footer class="bg-c1navy-900 text-slate-400 py-10 px-4 border-t border-c1gold-600/40 text-xs">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="text-center md:text-left">
+          <div class="font-serif text-white font-bold text-sm">Iraqi Medical Association UK & Europe</div>
+          <p class="text-slate-400 mt-1">Dedicated to medical science, diaspora fellowship, and public health since 1999.</p>
+        </div>
+        <div class="flex items-center gap-4 text-slate-300">
+          <a href="https://www.facebook.com/IMAUK" class="hover:text-c1gold-500"><i class="fa-brands fa-facebook text-base"></i></a>
+          <a href="https://www.instagram.com/iraqimedicalassociation.uk.eu/#" class="hover:text-c1gold-500"><i class="fa-brands fa-instagram text-base"></i></a>
+          <a href="https://x.com/ima_uk" class="hover:text-c1gold-500"><i class="fa-brands fa-x-twitter text-base"></i></a>
+          <a href="https://ima-uk.forumotion.com/register" class="hover:text-c1gold-500"><i class="fa-solid fa-comments text-base"></i></a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+
+  <!-- ======================================================== -->
+  <!-- CONCEPT 2: MODERN HUMANITARIAN & CLINICAL COMMUNITY     -->
+  <!-- ======================================================== -->
+  <main id="concept-2" class="concept-view bg-slate-50 text-slate-800 font-outfit">
+    
+    <!-- Warm Community Header -->
+    <header class="bg-white shadow-sm border-b border-slate-100 sticky top-[57px] z-40">
+      <div class="max-w-7xl mx-auto px-4 py-3.5 flex items-center justify-between">
+        
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+          <img src="downloaded_site/images/WhatsApp_Image_2025-07-27_at_18.50.18-removebg-preview.png" alt="IMA Logo" class="h-12 w-auto" />
+          <div>
+            <span class="font-extrabold text-xl text-c2teal-900 tracking-tight block leading-tight">Iraqi Medical Association</span>
+            <span class="text-xs font-semibold text-c2teal-700 tracking-wide">UK & Europe Community</span>
+          </div>
+        </div>
+
+        <!-- Community Nav Links -->
+        <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-700">
+          <a href="#c2-community" class="hover:text-c2teal-700 transition">Our Community</a>
+          <a href="#c2-agm" class="hover:text-c2teal-700 transition">AGM 2025</a>
+          <a href="#c2-missions" class="hover:text-c2teal-700 transition">Workshops & Missions</a>
+          <a href="#c2-junior" class="hover:text-c2teal-700 transition">IMG Mentorship</a>
+          <a href="#c2-connect" class="hover:text-c2teal-700 transition">Connect</a>
+        </div>
+
+        <!-- Warm CTA -->
+        <div class="flex items-center gap-3">
+          <a href="#c2-join" class="px-4 py-2 bg-c2teal-800 hover:bg-c2teal-700 text-white font-bold text-sm rounded-full shadow hover:shadow-lg transition">
+            Join For Free
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Warm Mission-Driven Hero -->
+    <section class="relative bg-gradient-to-br from-c2teal-900 via-c2teal-800 to-teal-950 text-white py-16 md:py-24 px-4 overflow-hidden">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-12 gap-10 items-center">
+        
+        <div class="md:col-span-7 space-y-6">
+          <span class="inline-block px-3 py-1 bg-white/10 backdrop-blur text-teal-200 text-xs font-bold rounded-full uppercase tracking-wider">
+            🤝 A Non-Profit Diaspora Community
+          </span>
+          <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
+            Connecting Doctors. <br/>
+            Mentoring Trainees. <br/>
+            <span class="text-teal-300">Empowering Healthcare.</span>
+          </h1>
+          <p class="text-teal-100 text-base md:text-lg max-w-xl font-normal leading-relaxed">
+            We bring together experienced NHS consultants, passionate junior trainees, and diaspora medical staff across Europe to collaborate, learn, and deliver humanitarian support.
+          </p>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#c2-join" class="px-7 py-3.5 bg-white text-c2teal-900 hover:bg-teal-50 font-bold text-sm rounded-full shadow-lg transition duration-150 flex items-center gap-2">
+              <i class="fa-solid fa-heart-pulse text-rose-500"></i> Join the Community (Free)
+            </a>
+            <a href="#c2-agm" class="px-6 py-3.5 bg-teal-700/60 hover:bg-teal-700 text-white font-semibold text-sm rounded-full border border-teal-500/40 transition">
+              Explore AGM 2025
+            </a>
+          </div>
+
+          <!-- Quick Social Badges -->
+          <div class="flex items-center gap-4 pt-4 text-xs text-teal-200">
+            <span>Join 10k+ followers:</span>
+            <a href="https://www.facebook.com/IMAUK" target="_blank" class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.instagram.com/iraqimedicalassociation.uk.eu/#" target="_blank" class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/ima_uk" target="_blank" class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://ima-uk.forumotion.com/register" target="_blank" class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition"><i class="fa-solid fa-comments"></i></a>
+          </div>
+        </div>
+
+        <!-- Right Side: Live Countdown & AGM 2025 Focus Card -->
+        <div class="md:col-span-5">
+          <div class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold text-c2teal-700 uppercase tracking-widest bg-teal-50 px-3 py-1 rounded-full">Annual Conference</span>
+              <span class="text-xs text-slate-500 font-medium"><i class="fa-solid fa-location-dot text-rose-500"></i> London & Virtual</span>
+            </div>
+            
+            <img src="downloaded_site/images/AGM_2025_4.jpg" alt="AGM 2025 Conference" class="w-full h-44 object-cover rounded-2xl mb-4 shadow" />
+            
+            <h3 class="text-xl font-bold text-slate-900 leading-snug">IMA Annual General Meeting 2025</h3>
+            <p class="text-xs text-slate-600 mt-2">Featuring keynote scientific presentations, junior doctor research posters, and cultural dinner celebration.</p>
+            
+            <!-- Live Simulated Countdown -->
+            <div class="grid grid-cols-4 gap-2 my-4 text-center">
+              <div class="bg-slate-100 p-2 rounded-xl">
+                <div class="text-lg font-extrabold text-c2teal-800">42</div>
+                <div class="text-[10px] text-slate-500 uppercase">Days</div>
+              </div>
+              <div class="bg-slate-100 p-2 rounded-xl">
+                <div class="text-lg font-extrabold text-c2teal-800">18</div>
+                <div class="text-[10px] text-slate-500 uppercase">Hours</div>
+              </div>
+              <div class="bg-slate-100 p-2 rounded-xl">
+                <div class="text-lg font-extrabold text-c2teal-800">35</div>
+                <div class="text-[10px] text-slate-500 uppercase">Mins</div>
+              </div>
+              <div class="bg-slate-100 p-2 rounded-xl">
+                <div class="text-lg font-extrabold text-c2teal-800">12</div>
+                <div class="text-[10px] text-slate-500 uppercase">Secs</div>
+              </div>
+            </div>
+
+            <a href="#c2-join" class="block text-center w-full py-3 bg-c2teal-800 hover:bg-c2teal-700 text-white font-bold text-sm rounded-xl transition">
+              Reserve Free Attendee Pass
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Stat Counter Bar -->
+    <section class="bg-teal-50 border-y border-teal-100 py-8 px-4">
+      <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div>
+          <div class="text-3xl font-extrabold text-c2teal-900">1,200+</div>
+          <div class="text-xs text-slate-600 font-semibold uppercase mt-1">Medical Professionals</div>
+        </div>
+        <div>
+          <div class="text-3xl font-extrabold text-c2teal-900">25+</div>
+          <div class="text-xs text-slate-600 font-semibold uppercase mt-1">Years of History</div>
+        </div>
+        <div>
+          <div class="text-3xl font-extrabold text-c2teal-900">100%</div>
+          <div class="text-xs text-slate-600 font-semibold uppercase mt-1">Non-Profit & Free</div>
+        </div>
+        <div>
+          <div class="text-3xl font-extrabold text-c2teal-900">15+</div>
+          <div class="text-xs text-slate-600 font-semibold uppercase mt-1">European Countries</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Humanitarian Training & Red Crescent Section -->
+    <section id="c2-missions" class="py-16 px-4 max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-12 gap-10 items-center">
+        <div class="md:col-span-6 space-y-4">
+          <span class="text-xs font-bold text-c2teal-700 uppercase tracking-widest bg-teal-100 px-3 py-1 rounded-full">Humanitarian Collaboration</span>
+          <h2 class="text-3xl font-extrabold text-slate-900">Red Crescent Clinical Workshops & Training</h2>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Our members actively volunteer their expertise, providing surgical training, emergency medicine workshops, and specialized clinical masterclasses in collaboration with the Iraqi Red Crescent Society and European humanitarian partners.
+          </p>
+          <ul class="space-y-2 text-sm text-slate-700 font-medium">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-c2teal-600"></i> Emergency resuscitation and trauma simulation</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-c2teal-600"></i> Specialized surgical webinars with live Q&A</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-c2teal-600"></i> Direct donation of modern medical equipment & journals</li>
+          </ul>
+        </div>
+        <div class="md:col-span-6">
+          <div class="grid grid-cols-2 gap-4">
+            <img src="downloaded_site/images/Screenshot_2025-08-30_175023.png" alt="Workshop Photo" class="w-full h-48 object-cover rounded-2xl shadow" />
+            <img src="downloaded_site/images/Screenshot_2025-08-30_180258.png" alt="Lecture" class="w-full h-48 object-cover rounded-2xl shadow" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Junior Doctor Mentorship (Community Hub) -->
+    <section id="c2-junior" class="bg-white py-16 px-4 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <h2 class="text-3xl font-extrabold text-slate-900">Supporting the Next Generation of Doctors</h2>
+          <p class="text-slate-600 text-sm mt-2">Moving to the UK or European healthcare systems can be challenging. Our senior fellows provide 1-on-1 guidance every step of the way.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="p-6 rounded-2xl bg-teal-50/60 border border-teal-100 space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-c2teal-700 text-white flex items-center justify-center text-xl">
+              <i class="fa-solid fa-stethoscope"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">GMC & PLAB Guidance</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">Preparation tips, OSCE workshops, and structured clinical revision sessions taught by recent successful examinees.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-teal-50/60 border border-teal-100 space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-c2teal-700 text-white flex items-center justify-center text-xl">
+              <i class="fa-solid fa-hospital-user"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">NHS Induction & Job Support</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">CV review, interview preparation, and understanding NHS clinical culture, electronic health records, and audit portfolios.</p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-teal-50/60 border border-teal-100 space-y-3">
+            <div class="w-12 h-12 rounded-xl bg-c2teal-700 text-white flex items-center justify-center text-xl">
+              <i class="fa-solid fa-globe-europe"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900">Pan-European Recognition</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">Advice for Iraqi medical graduates practicing or pursuing postgraduate training in Germany, France, Ireland, and Scandinavia.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Warm Community Registration CTA -->
+    <section id="c2-join" class="bg-gradient-to-r from-c2teal-900 to-teal-950 text-white py-16 px-4">
+      <div class="max-w-3xl mx-auto text-center space-y-6">
+        <h2 class="text-3xl md:text-4xl font-extrabold">Ready to Join Your Medical Colleagues?</h2>
+        <p class="text-teal-100 text-sm md:text-base">Membership is free and opens immediate access to our AGM, lectures, scientific posters, and private discussion forums.</p>
+        
+        <form onsubmit="event.preventDefault(); alert('Demo: Concept 2 registration sent!');" class="bg-white text-slate-800 p-6 rounded-2xl shadow-2xl space-y-4 text-left">
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Your Full Name</label>
+              <input type="text" placeholder="Dr. Ahmed Kareem" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none" required />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Email Address</label>
+              <input type="email" placeholder="ahmed@example.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-teal-500 focus:outline-none" required />
+            </div>
+          </div>
+          <button type="submit" class="w-full py-3 bg-c2teal-800 hover:bg-c2teal-700 text-white font-bold text-sm rounded-xl transition shadow">
+            Complete Free Registration
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Concept 2 Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 px-4 text-xs">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>© 2026 Iraqi Medical Association UK & Europe (IMA UK). Non-profit organisation.</div>
+        <div class="flex items-center gap-4 text-white">
+          <a href="https://www.facebook.com/IMAUK" class="hover:text-teal-400"><i class="fa-brands fa-facebook"></i> Facebook</a>
+          <a href="https://www.instagram.com/iraqimedicalassociation.uk.eu/#" class="hover:text-teal-400"><i class="fa-brands fa-instagram"></i> Instagram</a>
+          <a href="https://x.com/ima_uk" class="hover:text-teal-400"><i class="fa-brands fa-x-twitter"></i> X / Twitter</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+
+  <!-- ======================================================== -->
+  <!-- CONCEPT 3: PAN-EUROPEAN MEDICAL FORUM & DIGITAL HUB     -->
+  <!-- ======================================================== -->
+  <main id="concept-3" class="concept-view bg-slate-50 text-slate-900 font-inter">
+    
+    <!-- Utility Portal Header -->
+    <header class="bg-c3slate-900 text-white border-b border-slate-800 sticky top-[57px] z-40">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        
+        <div class="flex items-center gap-3">
+          <img src="downloaded_site/images/WhatsApp_Image_2025-07-27_at_18.50.18-removebg-preview.png" alt="IMA Logo" class="h-10 w-auto" />
+          <div>
+            <span class="font-bold text-base tracking-tight text-white block">IMA UK & EUROPE</span>
+            <span class="text-[11px] text-emerald-400 font-mono">SCIENTIFIC MEDICAL PORTAL</span>
+          </div>
+        </div>
+
+        <!-- Portal Navigation Tabs -->
+        <div class="hidden lg:flex items-center gap-5 text-xs font-semibold text-slate-300">
+          <a href="#c3-hub" class="hover:text-white px-2 py-1 rounded bg-slate-800 text-white">Dashboard</a>
+          <a href="#c3-posters" class="hover:text-white transition">Posters & Research</a>
+          <a href="#c3-directory" class="hover:text-white transition">Directory</a>
+          <a href="#c3-agm" class="hover:text-white transition">AGM 2025 Schedule</a>
+          <a href="https://ima-uk.forumotion.com/register" target="_blank" class="text-amber-400 hover:text-amber-300 flex items-center gap-1">
+            <i class="fa-solid fa-comments"></i> Discussion Forum
+          </a>
+        </div>
+
+        <!-- Fast Actions -->
+        <div class="flex items-center gap-3">
+          <a href="#c3-register" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold rounded shadow transition flex items-center gap-1.5">
+            <i class="fa-solid fa-user-plus"></i> Join Network
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Concept 3 Portal Fold -->
+    <section id="c3-hub" class="bg-c3slate-800 text-white py-12 px-4 border-b border-slate-700">
+      <div class="max-w-7xl mx-auto">
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-slate-700">
+          <div>
+            <div class="text-xs font-mono text-blue-400 uppercase tracking-wider">Pan-European Clinical Hub</div>
+            <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight mt-1">Medical Association Portal</h1>
+            <p class="text-slate-400 text-xs md:text-sm mt-1">Central resource for scientific posters, AGM 2025 registration, and verified member networking.</p>
+          </div>
+          <div class="flex gap-2">
+            <a href="#c3-posters" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-xs font-semibold rounded text-white transition flex items-center gap-2">
+              <i class="fa-solid fa-file-pdf text-rose-400"></i> Download Posters
+            </a>
+            <a href="#c3-register" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-xs font-semibold rounded text-white transition flex items-center gap-2">
+              <i class="fa-solid fa-id-card"></i> Member Portal
+            </a>
+          </div>
+        </div>
+
+        <!-- 4 Fast Action Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+          
+          <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-700 hover:border-blue-500 transition">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-blue-400 uppercase">Conference</span>
+              <i class="fa-solid fa-calendar-days text-slate-500"></i>
+            </div>
+            <h3 class="font-bold text-sm text-white">AGM 2025 Conference</h3>
+            <p class="text-xs text-slate-400 mt-1">Keynote lectures, CME credits, paper submissions.</p>
+            <a href="#c3-agm" class="inline-block mt-3 text-xs text-blue-400 font-semibold hover:underline">View Schedule & Venue →</a>
+          </div>
+
+          <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-700 hover:border-blue-500 transition">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-emerald-400 uppercase">Scientific</span>
+              <i class="fa-solid fa-book-medical text-slate-500"></i>
+            </div>
+            <h3 class="font-bold text-sm text-white">Posters & Research</h3>
+            <p class="text-xs text-slate-400 mt-1">Peer-reviewed posters presented at IMA symposia.</p>
+            <a href="#c3-posters" class="inline-block mt-3 text-xs text-emerald-400 font-semibold hover:underline">Access 2025 Posters →</a>
+          </div>
+
+          <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-700 hover:border-blue-500 transition">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-amber-400 uppercase">Community</span>
+              <i class="fa-solid fa-users text-slate-500"></i>
+            </div>
+            <h3 class="font-bold text-sm text-white">Member Directory</h3>
+            <p class="text-xs text-slate-400 mt-1">Cross-specialty referrals and European contacts.</p>
+            <a href="#c3-directory" class="inline-block mt-3 text-xs text-amber-400 font-semibold hover:underline">Browse Specialties →</a>
+          </div>
+
+          <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-700 hover:border-blue-500 transition">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold text-purple-400 uppercase">Official Forum</span>
+              <i class="fa-solid fa-comments text-slate-500"></i>
+            </div>
+            <h3 class="font-bold text-sm text-white">Clinical Discussion Board</h3>
+            <p class="text-xs text-slate-400 mt-1">Verified doctor forum hosted on Forumotion.</p>
+            <a href="https://ima-uk.forumotion.com/register" target="_blank" class="inline-block mt-3 text-xs text-purple-400 font-semibold hover:underline">Enter Forum →</a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Searchable Directory Simulator -->
+    <section id="c3-directory" class="py-12 px-4 max-w-7xl mx-auto">
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-lg font-bold text-slate-900">Clinical Specialty & Member Directory</h2>
+            <p class="text-xs text-slate-500">Search Iraqi doctors practicing across NHS trusts and European hospitals</p>
+          </div>
+          <div class="flex gap-2">
+            <input type="text" placeholder="Filter by name, specialty, or city..." class="text-xs px-3.5 py-2 border rounded-lg w-64 focus:outline-none focus:border-blue-600" />
+            <select class="text-xs px-3 py-2 border rounded-lg text-slate-700">
+              <option>All Countries (UK & Europe)</option>
+              <option>United Kingdom</option>
+              <option>Germany</option>
+              <option>Ireland</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Sample Directory Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-700">
+            <thead class="bg-slate-50 border-y text-slate-600 uppercase font-semibold">
+              <tr>
+                <th class="py-3 px-4">Member</th>
+                <th class="py-3 px-4">Specialty</th>
+                <th class="py-3 px-4">Location / Hospital</th>
+                <th class="py-3 px-4">Status</th>
+                <th class="py-3 px-4 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="py-3 px-4 font-bold text-slate-900">Dr. M. Al-Rawi, FRCS</td>
+                <td class="py-3 px-4">General & Laparoscopic Surgery</td>
+                <td class="py-3 px-4">London NHS Trust, UK</td>
+                <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Verified Consultant</span></td>
+                <td class="py-3 px-4 text-right"><button class="text-blue-600 hover:underline">Contact</button></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-slate-900">Dr. Layla H., MRCP</td>
+                <td class="py-3 px-4">Cardiology & Echocardiography</td>
+                <td class="py-3 px-4">Manchester University Hospital, UK</td>
+                <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Verified Specialist</span></td>
+                <td class="py-3 px-4 text-right"><button class="text-blue-600 hover:underline">Contact</button></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-bold text-slate-900">Dr. Z. Al-Khafaji, Facharzt</td>
+                <td class="py-3 px-4">Anesthesiology & Critical Care</td>
+                <td class="py-3 px-4">Berlin Charité, Germany</td>
+                <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">Verified EU Fellow</span></td>
+                <td class="py-3 px-4 text-right"><button class="text-blue-600 hover:underline">Contact</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scientific Posters Showcase -->
+    <section id="c3-posters" class="bg-slate-100 py-12 px-4 border-t border-slate-200">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900">Scientific Posters & Conference Papers</h2>
+            <p class="text-xs text-slate-600">Research presented by Iraqi trainees and researchers at recent AGMs</p>
+          </div>
+          <button class="text-xs font-bold text-blue-600 hover:underline">Submit Abstract for 2025 →</button>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-200 space-y-3">
+            <img src="downloaded_site/images/Screenshot_2025-08-30_174102.png" alt="Poster 1" class="w-full h-40 object-cover rounded-lg" />
+            <span class="text-[10px] font-bold uppercase text-blue-600 bg-blue-50 px-2 py-0.5 rounded">Clinical Audit</span>
+            <h4 class="font-bold text-sm text-slate-900">Surgical Outcomes in Acute Abdominal Interventions</h4>
+            <p class="text-xs text-slate-500">Presented at IMA UK Conference 2024</p>
+            <button class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded transition">Download Poster (PDF)</button>
+          </div>
+
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-200 space-y-3">
+            <img src="downloaded_site/images/Screenshot_2025-08-30_180433.png" alt="Poster 2" class="w-full h-40 object-cover rounded-lg" />
+            <span class="text-[10px] font-bold uppercase text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">Cardiology</span>
+            <h4 class="font-bold text-sm text-slate-900">Preventative Strategies for Ischemic Heart Disease</h4>
+            <p class="text-xs text-slate-500">Presented at European Hybrid Session</p>
+            <button class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded transition">Download Poster (PDF)</button>
+          </div>
+
+          <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-200 space-y-3">
+            <img src="downloaded_site/images/Screenshot_2025-08-30_180520.png" alt="Poster 3" class="w-full h-40 object-cover rounded-lg" />
+            <span class="text-[10px] font-bold uppercase text-amber-600 bg-amber-50 px-2 py-0.5 rounded">Public Health</span>
+            <h4 class="font-bold text-sm text-slate-900">Evaluating Telemedicine Impact on Chronic Care</h4>
+            <p class="text-xs text-slate-500">IMA Scientific Committee Review</p>
+            <button class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded transition">Download Poster (PDF)</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fast Portal Registration -->
+    <section id="c3-register" class="py-12 px-4 max-w-4xl mx-auto">
+      <div class="bg-c3slate-900 text-white p-8 rounded-2xl shadow-xl">
+        <h3 class="text-xl font-bold">Fast-Track Membership Enrolment</h3>
+        <p class="text-xs text-slate-400 mt-1">Get verified access to the scientific repository, conference discounts, and private clinical channels.</p>
+        
+        <form onsubmit="event.preventDefault(); alert('Demo: Concept 3 registration received!');" class="mt-6 space-y-4">
+          <div class="grid md:grid-cols-2 gap-4 text-slate-900">
+            <input type="text" placeholder="Full Name & Title" class="px-3.5 py-2 rounded text-xs border focus:outline-none" required />
+            <input type="email" placeholder="Official NHS / Medical Email" class="px-3.5 py-2 rounded text-xs border focus:outline-none" required />
+          </div>
+          <button type="submit" class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded uppercase tracking-wider transition">
+            Submit Registration
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Concept 3 Footer -->
+    <footer class="bg-c3slate-900 border-t border-slate-800 text-slate-500 py-6 px-4 text-xs">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+        <div>IMA UK & Europe Digital Medical Portal · Regulated Diaspora NGO</div>
+        <div class="flex gap-4 text-slate-400">
+          <a href="https://www.facebook.com/IMAUK" class="hover:text-white"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://www.instagram.com/iraqimedicalassociation.uk.eu/#" class="hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://x.com/ima_uk" class="hover:text-white"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+
+  <!-- ======================================================== -->
+  <!-- JAVASCRIPT CONTROLLER FOR TAB SWITCHING & POPUPS        -->
+  <!-- ======================================================== -->
+  <script>
+    let currentConcept = 1;
+
+    function switchConcept(index) {
+      currentConcept = index;
+
+      // Hide all concept views
+      document.querySelectorAll('.concept-view').forEach(el => el.classList.remove('active'));
+      
+      // Reset all tab button styles
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-amber-500', 'text-slate-950', 'shadow-md', 'bg-emerald-500', 'bg-blue-600', 'text-white');
+        btn.classList.add('text-slate-300');
+      });
+
+      // Show selected concept view
+      const targetView = document.getElementById('concept-' + index);
+      if (targetView) targetView.classList.add('active');
+
+      // Style active button according to concept aesthetic
+      const activeBtn = document.getElementById('btn-tab-' + index);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-300');
+        if (index === 1) {
+          activeBtn.classList.add('bg-amber-500', 'text-slate-950', 'shadow-md');
+        } else if (index === 2) {
+          activeBtn.classList.add('bg-emerald-500', 'text-slate-950', 'shadow-md');
+        } else if (index === 3) {
+          activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-md');
+        }
+      }
+
+      // Smooth scroll back to top of preview when switching
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function alertChosen() {
+      const names = [
+        "Concept 1: The Royal College & Institutional Heritage (Prestigious, Oxford Navy & Gold, Serifs)",
+        "Concept 2: Modern Humanitarian & Clinical Community (Warm, Emerald Teal & Cyan, Mentorship & AGM Countdown)",
+        "Concept 3: Pan-European Medical Forum & Digital Hub (Clean, Slate Blue & White, Directory & Scientific Hub)"
+      ];
+      alert("You selected:\n" + names[currentConcept - 1] + "\n\nReply in chat with your choice (1, 2, or 3) and we will proceed to remake the complete website using this design!");
+    }
+  </script>
+</body>
+</html>
