@@ -57,9 +57,11 @@ Then navigate to http://localhost:8000/.
 
 ---
 
-## Conference photo pages (unlisted)
-The `c35/` folder holds two unlisted pages with framed photographs from the 35th IMA UK & EU International Medical Conference (Kingston upon Thames, 31 Oct - 1 Nov 2026): an English page for UK/EU attendees and an Arabic page for attendees from Iraq. They are not in the menu or the sitemap, carry `noindex`, and are shared by direct link only (the folder names are in `c35/photos.json`).
+## AGM 2026 and the conference photo pages
+`agm2026.html` is the public page for the 35th IMA UK & EU International Medical Conference (Kingston upon Thames, 31 Oct - 1 Nov 2026), opened from the two conference buttons on the home page (AGM 2025 and AGM 2026). It shows a few photo highlights, with the Red Crescent credited as cooperating partner and Care Grid as media sponsor.
 
-Each photo carries a strip with the event name and the media sponsor (Care Grid). To add or change photos, edit `c35/photos.json` and rebuild:
+The `c35/` folder holds two separate unlisted pages with all the framed photographs: an English page for UK/EU attendees (with a short media-sponsor brochure) and an Arabic page for attendees from Iraq (with a direct-contact section). They are not linked from the site, not in the sitemap, carry `noindex`, and are shared by direct link only (the folder names are in `c35/photos.json`).
+
+Each photo carries a strip with the event name and the media sponsor. To add or change photos, edit `c35/photos.json` and rebuild:
 `python tools/build_conference_gallery.py --src <folder with the original photos>`
 The originals are not stored in the repository.

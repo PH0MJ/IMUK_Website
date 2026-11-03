@@ -140,7 +140,7 @@ def head(lang, title, desc):
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{esc(title)}</title>
   <meta name="description" content="{esc(desc)}" />
-  <!-- Unlisted page: shared by direct link only. Not in the menu or sitemap, and kept out of search results. -->
+  <!-- Not in the sitemap and kept out of search results (noindex). -->
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
   <meta name="referrer" content="no-referrer" />
   <link rel="stylesheet" href="../../assets/css/style.css" />
