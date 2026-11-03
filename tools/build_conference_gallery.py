@@ -28,6 +28,7 @@ ROOT = Path(__file__).resolve().parent.parent
 C35 = ROOT / "c35"
 FONT = ROOT / "tools" / "fonts" / "PlusJakartaSans-Variable.ttf"
 LOGO = C35 / "assets" / "caregrid-lockup.png"
+RC_LOGO = C35 / "assets" / "iraqi-red-crescent-logo.png"
 CREST = "../../assets/images/WhatsApp_Image_2025-07-27_at_18.50.18-removebg-preview.png"
 
 NAVY = (0, 51, 106)
@@ -54,9 +55,13 @@ def text_w(draw, text, f):
     return draw.textlength(text, font=f)
 
 
-def add_frame(photo, event):
-    """Return the photo with the event + media-sponsor strip added below it."""
+def add_frame(photo, event, crop=None):
+    """Return the photo (optionally cropped) with a strip below it: event name on the left,
+    Iraqi Red Crescent emblem and the Care Grid logo on the right."""
     photo = ImageOps.exif_transpose(photo).convert("RGB")
+    if crop:
+        w0, h0 = photo.size
+        photo = photo.crop((round(crop[0] * w0), round(crop[1] * h0), round(crop[2] * w0), round(crop[3] * h0)))
     scale = min(1.0, MAX_SIDE / max(photo.size))
     if scale < 1:
         photo = photo.resize((round(photo.width * scale), round(photo.height * scale)), Image.LANCZOS)
@@ -68,19 +73,24 @@ def add_frame(photo, event):
     d.rectangle([0, h, w, h + max(3, sh // 26)], fill=TEAL)
 
     pad = round(sh * 0.3)
-    # media-sponsor pill (right)
-    pill_h = round(sh * 0.76)
-    logo = Image.open(LOGO).convert("RGBA")
-    logo_h = round(pill_h * 0.46)
-    logo = logo.resize((round(logo.width * logo_h / logo.height), logo_h), Image.LANCZOS)
-    label_f = font(max(11, round(pill_h * 0.17)), True)
-    label = "MEDIA SPONSOR"
-    inner = round(pill_h * 0.16)
-    pill_w = max(logo.width, round(text_w(d, label, label_f))) + 2 * inner
+    # logo pill (right): Red Crescent emblem | divider | Care Grid logo (kept smaller than the emblem)
+    pill_h = round(sh * 0.70)
+    rc_h = round(pill_h * 0.78)
+    rc = Image.open(RC_LOGO).convert("RGB").resize((rc_h, rc_h), Image.LANCZOS)
+    cg_h = round(sh * 0.24)
+    cg = Image.open(LOGO).convert("RGBA")
+    cg = cg.resize((round(cg.width * cg_h / cg.height), cg_h), Image.LANCZOS)
+    inner, gap = round(pill_h * 0.14), round(pill_h * 0.16)
+    line_w = max(1, sh // 90)
+    pill_w = inner + rc.width + gap + line_w + gap + cg.width + inner
     px, py = w - pad - pill_w, h + (sh - pill_h) // 2
     d.rounded_rectangle([px, py, px + pill_w, py + pill_h], radius=round(pill_h * 0.16), fill=WHITE)
-    d.text((px + pill_w / 2, py + round(pill_h * 0.10)), label, font=label_f, fill=MUTED, anchor="ma")
-    out.paste(logo, (px + (pill_w - logo.width) // 2, py + pill_h - logo_h - round(pill_h * 0.12)), logo)
+    x = px + inner
+    out.paste(rc, (x, py + (pill_h - rc_h) // 2))
+    x += rc.width + gap
+    d.rectangle([x, py + round(pill_h * 0.2), x + line_w - 1, py + pill_h - round(pill_h * 0.2)], fill=(205, 216, 226))
+    x += line_w + gap
+    out.paste(cg, (x, py + (pill_h - cg_h) // 2), cg)
 
     # event text (left), shrunk until it fits beside the pill
     max_w = px - 2 * pad
@@ -177,7 +187,7 @@ def hero(event, lang, with_print, zip_mb):
       <span class="badge badge-gold">{bi('Conference photographs', 'صور المؤتمر')}</span>
       <h2 class="c35-title">{bi(esc(event['name_en']), esc(event['name_ar']))}</h2>
       <p class="c35-meta">{bi(esc(event['place_en'] + ' · ' + event['dates_en']), esc(event['place_ar'] + ' · ' + event['dates_ar']))}</p>
-      <p class="c35-credit">{bi('In cooperation with the Iraqi Red Crescent Society · Media sponsor: Care Grid', 'بالتعاون مع جمعية الهلال الأحمر العراقي · الراعي الإعلامي: كير گرد')}</p>
+      <p class="c35-credit">{bi('In cooperation with the Iraqi Red Crescent Society', 'بالتعاون مع جمعية الهلال الأحمر العراقي')}</p>
       <div class="c35-actions">
         <a class="btn btn-gold" href="../{ZIP_NAME}" download>{bi(f'Download all photos (ZIP, {zip_mb} MB)', f'تحميل كل الصور (ZIP، {arabic_digits(zip_mb)} ميغابايت)')}</a>
         {print_btn}
@@ -187,18 +197,18 @@ def hero(event, lang, with_print, zip_mb):
 
 
 def sponsor_uk():
-    return f"""  <section class="section c35-sponsor" id="media-sponsor">
+    return f"""  <section class="section c35-sponsor" id="care-grid">
     <div class="container">
       <div class="sponsor-card">
         <div class="sponsor-logo"><img src="../assets/caregrid-lockup.png" alt="Care Grid" width="214" height="51" /></div>
         <div class="sponsor-body">
-          <span class="badge badge-navy">{bi('Media sponsor', 'الراعي الإعلامي')}</span>
+          <span class="badge badge-navy">{bi('About Care Grid', 'عن كير گرد')}</span>
           <h3>{bi('Care Grid: smart healthcare, made for Iraq', 'كير گرد: رعاية صحية ذكية صُنعت للعراق')}</h3>
           <p>{bi('Care Grid is a healthcare platform founded in Iraq and the UK. Its first product, Clinic Grid, is available now: appointments and the walk-in queue, patient files, visits and prescriptions, and referrals with WhatsApp reminders.',
                  'كير گرد منصة رعاية صحية تأسست في العراق وبريطانيا. أول منتجاتها Clinic Grid متاح الآن: المواعيد وطابور المراجعين، وملف المريض والزيارات والوصفات، والتحويلات وتذكيرات الواتساب.', 'span')}</p>
           <p>{bi('Lab Grid, Pharma Grid and Hospital Grid are coming soon.', 'Lab Grid وPharma Grid وHospital Grid قريباً.', 'span')}</p>
-          <p>{bi(f'Care Grid supported the 35th conference as media sponsor. To learn more, write to <a href="mailto:{EMAIL}?subject=Care%20Grid%20(from%20the%20IMA%20conference%20photos)">{EMAIL}</a> or visit <a href="https://caregr.id" target="_blank" rel="noopener noreferrer">caregr.id</a>.',
-                 f'دعمت كير گرد المؤتمر الخامس والثلاثين بصفتها الراعي الإعلامي. لمعرفة المزيد راسلونا على <a href="mailto:{EMAIL}?subject=Care%20Grid%20(from%20the%20IMA%20conference%20photos)">{EMAIL}</a> أو زوروا <a href="https://caregr.id" target="_blank" rel="noopener noreferrer">caregr.id</a>.', 'span')}</p>
+          <p>{bi(f'To learn more, write to <a href="mailto:{EMAIL}?subject=Care%20Grid%20(from%20the%20IMA%20conference%20photos)">{EMAIL}</a> or visit <a href="https://caregr.id" target="_blank" rel="noopener noreferrer">caregr.id</a>.',
+                 f'لمعرفة المزيد راسلونا على <a href="mailto:{EMAIL}?subject=Care%20Grid%20(from%20the%20IMA%20conference%20photos)">{EMAIL}</a> أو زوروا <a href="https://caregr.id" target="_blank" rel="noopener noreferrer">caregr.id</a>.', 'span')}</p>
         </div>
       </div>
     </div>
@@ -207,15 +217,15 @@ def sponsor_uk():
 
 def sponsor_iq():
     wa_text = urllib.parse.quote("مرحباً، شفت صور مؤتمر لندن وأحب أشوف شلون يشتغل كير گرد بعيادتي")
-    return f"""  <section class="section c35-sponsor" id="media-sponsor">
+    return f"""  <section class="section c35-sponsor" id="care-grid">
     <div class="container">
       <div class="sponsor-card">
         <div class="sponsor-logo"><img src="../assets/caregrid-lockup.png" alt="Care Grid" width="214" height="51" /></div>
         <div class="sponsor-body">
-          <span class="badge badge-navy">{bi('Media sponsor', 'الراعي الإعلامي')}</span>
+          <span class="badge badge-navy">{bi('About Care Grid', 'عن كير گرد')}</span>
           <h3>{bi('Care Grid: smart healthcare, made for Iraq', 'كير گرد: رعاية صحية ذكية صُنعت للعراق')}</h3>
-          <p>{bi('Care Grid supported the 35th conference as media sponsor. Its first product, Clinic Grid, is available now for clinics in Iraq: patient files, visits and prescriptions, appointments and the walk-in queue, and referrals with WhatsApp reminders.',
-                 'كير گرد هي الراعي الإعلامي للمؤتمر. أول منتجاتنا Clinic Grid متاح الآن للعيادات في العراق: ملف المريض والزيارات والوصفات، والمواعيد وطابور المراجعين، والتحويلات وتذكيرات الواتساب.', 'span')}</p>
+          <p>{bi('Care Grid’s first product, Clinic Grid, is available now for clinics in Iraq: patient files, visits and prescriptions, appointments and the walk-in queue, and referrals with WhatsApp reminders.',
+                 'أول منتجات كير گرد، Clinic Grid، متاح الآن للعيادات في العراق: ملف المريض والزيارات والوصفات، والمواعيد وطابور المراجعين، والتحويلات وتذكيرات الواتساب.', 'span')}</p>
           <p>{bi('Coming soon: Lab Grid · Pharma Grid · Hospital Grid.', 'قريباً: <bdi>Lab Grid</bdi> · <bdi>Pharma Grid</bdi> · <bdi>Hospital Grid</bdi>', 'span')}</p>
           <p class="sponsor-cta">{bi('Ask for a walkthrough inside your clinic: message us and let us show you how it works.', 'اطلب عرضاً داخل عيادتك: راسلنا وخلّينا نشوفك شلون يشتغل.', 'span')}</p>
           <div class="sponsor-links">
@@ -315,10 +325,16 @@ def main():
         p["alt_en"], p["alt_ar"] = g["alt_en"], g["alt_ar"]
         p["dl"] = f"IMA-UK-EU-35th-conference-{p['group']}-{n:02d}.jpg"
 
+    keep = {p["slug"] + ".jpg" for p in photos}
+    for folder in ("photos", "thumbs"):
+        for f in (C35 / folder).glob("*.jpg"):
+            if f.name not in keep:
+                f.unlink()
+
     for p in photos:
         full, thumb_path = C35 / "photos" / f"{p['slug']}.jpg", C35 / "thumbs" / f"{p['slug']}.jpg"
         if args.force or not (full.exists() and thumb_path.exists()):
-            framed = add_frame(Image.open(src / p["src"]), event)
+            framed = add_frame(Image.open(src / p["src"]), event, p.get("crop"))
             framed.save(full, quality=QUALITY, optimize=True, progressive=True)
             thumb = framed.copy()
             thumb.thumbnail((THUMB_SIDE, THUMB_SIDE), Image.LANCZOS)

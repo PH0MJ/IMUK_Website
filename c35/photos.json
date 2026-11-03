@@ -15,239 +15,92 @@
   },
   "photos": [
     {
-      "slug": "delegates-130854",
-      "src": "20261031_130854.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-130855",
-      "src": "20261031_130855.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-130856",
-      "src": "20261031_130856.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-130911",
-      "src": "20261031_130911.jpg",
-      "group": "delegates"
-    },
-    {
       "slug": "delegates-130912-b",
       "src": "20261031_130912(0).jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-130912",
-      "src": "20261031_130912.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-130913",
-      "src": "20261031_130913.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-130944",
-      "src": "20261031_130944.jpg",
-      "group": "delegates"
+      "group": "delegates",
+      "crop": [
+        0.0,
+        0.2,
+        1.0,
+        0.74
+      ]
     },
     {
       "slug": "delegates-130945",
       "src": "20261031_130945.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-130947",
-      "src": "20261031_130947.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-130949",
-      "src": "20261031_130949.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-130950",
-      "src": "20261031_130950.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-130955",
-      "src": "20261031_130955.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-130956",
-      "src": "20261031_130956.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-130957",
-      "src": "20261031_130957.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-130958",
-      "src": "20261031_130958.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-131003",
-      "src": "20261031_131003.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-131004",
-      "src": "20261031_131004.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "delegates-131008",
-      "src": "20261031_131008.jpg",
-      "group": "delegates"
+      "group": "delegates",
+      "crop": [
+        0.02,
+        0.26,
+        0.98,
+        0.8
+      ]
     },
     {
       "slug": "delegates-131009",
       "src": "20261031_131009.jpg",
-      "group": "delegates"
-    },
-    {
-      "slug": "stage-153548",
-      "src": "20261031_153548.jpg",
-      "group": "stage"
-    },
-    {
-      "slug": "stage-153550",
-      "src": "20261031_153550.jpg",
-      "group": "stage"
-    },
-    {
-      "slug": "stage-153551",
-      "src": "20261031_153551.jpg",
-      "group": "stage"
-    },
-    {
-      "slug": "stage-153553",
-      "src": "20261031_153553.jpg",
-      "group": "stage"
-    },
-    {
-      "slug": "stage-153556",
-      "src": "20261031_153556.jpg",
-      "group": "stage"
-    },
-    {
-      "slug": "stage-153559",
-      "src": "20261031_153559.jpg",
-      "group": "stage"
-    },
-    {
-      "slug": "stage-153600",
-      "src": "20261031_153600.jpg",
-      "group": "stage"
-    },
-    {
-      "slug": "stage-153601-b",
-      "src": "20261031_153601(0).jpg",
-      "group": "stage"
+      "group": "delegates",
+      "crop": [
+        0.0,
+        0.22,
+        1.0,
+        0.76
+      ]
     },
     {
       "slug": "stage-153601",
       "src": "20261031_153601.jpg",
-      "group": "stage"
+      "group": "stage",
+      "crop": [
+        0.0,
+        0.12,
+        1.0,
+        0.8
+      ]
     },
     {
-      "slug": "stage-153602",
-      "src": "20261031_153602.jpg",
-      "group": "stage"
-    },
-    {
-      "slug": "group-photo-111800",
-      "src": "20261031_111800.jpg",
-      "group": "group-photo"
-    },
-    {
-      "slug": "group-photo-111801",
-      "src": "20261031_111801.jpg",
-      "group": "group-photo"
-    },
-    {
-      "slug": "group-photo-111803",
-      "src": "20261031_111803.jpg",
-      "group": "group-photo"
-    },
-    {
-      "slug": "group-photo-111805",
-      "src": "20261031_111805.jpg",
-      "group": "group-photo"
-    },
-    {
-      "slug": "group-photo-111810",
-      "src": "20261031_111810.jpg",
-      "group": "group-photo"
-    },
-    {
-      "slug": "group-photo-111816",
-      "src": "20261031_111816.jpg",
-      "group": "group-photo"
-    },
-    {
-      "slug": "group-photo-111817",
-      "src": "20261031_111817.jpg",
-      "group": "group-photo"
+      "slug": "stage-153553",
+      "src": "20261031_153553.jpg",
+      "group": "stage",
+      "crop": [
+        0.0,
+        0.02,
+        0.92,
+        0.9
+      ]
     },
     {
       "slug": "group-photo-111821",
       "src": "20261031_111821.jpg",
-      "group": "group-photo"
-    },
-    {
-      "slug": "around-134455",
-      "src": "20261031_134455.jpg",
-      "group": "around"
-    },
-    {
-      "slug": "around-134456",
-      "src": "20261031_134456.jpg",
-      "group": "around"
+      "group": "group-photo",
+      "crop": [
+        0.0,
+        0.18,
+        1.0,
+        0.78
+      ]
     },
     {
       "slug": "around-134457",
       "src": "20261031_134457.jpg",
-      "group": "around"
-    },
-    {
-      "slug": "around-134515",
-      "src": "20261031_134515.jpg",
-      "group": "around"
-    },
-    {
-      "slug": "around-134548",
-      "src": "20261031_134548.jpg",
-      "group": "around"
+      "group": "around",
+      "crop": [
+        0.0,
+        0.05,
+        1.0,
+        1.0
+      ]
     },
     {
       "slug": "around-134552",
       "src": "20261031_134552.jpg",
-      "group": "around"
-    },
-    {
-      "slug": "around-134559",
-      "src": "20261031_134559.jpg",
-      "group": "around"
-    },
-    {
-      "slug": "around-134603-b",
-      "src": "20261031_134603(0).jpg",
-      "group": "around"
-    },
-    {
-      "slug": "around-134603",
-      "src": "20261031_134603.jpg",
-      "group": "around"
+      "group": "around",
+      "crop": [
+        0.0,
+        0.0,
+        0.8,
+        1.0
+      ]
     }
   ],
   "groups": [
