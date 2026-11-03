@@ -254,7 +254,8 @@ def footer():
     <button type="button" class="lb-nav lb-next" aria-label="Next">&#8250;</button>
     <figure class="lb-figure">
       <img class="lb-img" alt="" />
-      <figcaption class="lb-cap"><span class="lb-text"></span> <a class="lb-dl" href="#" download>{bi('Download', 'تحميل')}</a></figcaption>
+      <figcaption class="lb-cap"><span class="lb-text"></span> <a class="lb-dl" href="#" download>{bi('Download', 'تحميل')}</a>
+        <span class="lb-fail" role="status">{bi('The full-size photo could not be loaded. Use Download to open it.', 'تعذّر تحميل الصورة بالحجم الكامل. استخدم زر تحميل لفتحها.')}</span></figcaption>
     </figure>
   </div>
 

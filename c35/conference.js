@@ -29,18 +29,43 @@
     text.textContent = a.getAttribute('data-' + lang());
   }
 
+  var fig = box.querySelector('.lb-figure');
+  var token = 0;
+
+  // Show the already-loaded thumbnail at once, then swap in the full-size photo when it has arrived.
+  // On a slow connection the viewer is never blank, and a failed load says so instead of showing a broken icon.
   function show(i) {
     current = (i + links.length) % links.length;
     var a = links[current];
-    img.src = a.getAttribute('href');
+    var full = a.getAttribute('href');
+    var thumb = a.querySelector('img');
+    var mine = ++token;
     img.alt = a.getAttribute('data-' + lang());
-    dl.href = a.getAttribute('href');
+    if (thumb && thumb.naturalWidth) img.style.setProperty('--ar', thumb.naturalWidth / thumb.naturalHeight);
+    else img.style.removeProperty('--ar');
+    img.src = (thumb && (thumb.currentSrc || thumb.src)) || full;
+    fig.classList.add('loading');
+    fig.classList.remove('failed');
+    dl.href = full;
     dl.setAttribute('download', a.getAttribute('data-download'));
     caption();
+    var big = new Image();
+    big.onload = function () {
+      if (mine !== token) return;
+      img.style.setProperty('--ar', big.naturalWidth / big.naturalHeight);
+      img.src = big.src;
+      fig.classList.remove('loading');
+    };
+    big.onerror = function () {
+      if (mine !== token) return;
+      fig.classList.remove('loading');
+      fig.classList.add('failed');
+    };
+    big.src = full;
   }
 
   function open(i) { show(i); box.hidden = false; document.body.style.overflow = 'hidden'; box.querySelector('.lb-close').focus(); }
-  function close() { box.hidden = true; img.removeAttribute('src'); document.body.style.overflow = ''; if (current >= 0) links[current].focus(); }
+  function close() { token++; box.hidden = true; img.removeAttribute('src'); document.body.style.overflow = ''; if (current >= 0) links[current].focus(); }
 
   links.forEach(function (a, i) {
     a.addEventListener('click', function (e) { e.preventDefault(); open(i); });
