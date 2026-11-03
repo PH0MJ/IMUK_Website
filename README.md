@@ -54,3 +54,12 @@ To view the website locally, open index.html in any browser or launch a simple H
 python -m http.server 8000
 `
 Then navigate to http://localhost:8000/.
+
+---
+
+## Conference photo pages (unlisted)
+The `c35/` folder holds two unlisted pages with framed photographs from the 35th IMA UK & EU International Medical Conference (Kingston upon Thames, 31 Oct - 1 Nov 2026): an English page for UK/EU attendees and an Arabic page for attendees from Iraq. They are not in the menu or the sitemap, carry `noindex`, and are shared by direct link only (the folder names are in `c35/photos.json`).
+
+Each photo carries a strip with the event name and the media sponsor (Care Grid). To add or change photos, edit `c35/photos.json` and rebuild:
+`python tools/build_conference_gallery.py --src <folder with the original photos>`
+The originals are not stored in the repository.

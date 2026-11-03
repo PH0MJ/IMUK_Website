@@ -1,0 +1,93 @@
+/* 35th conference photo pages (unlisted). Builds on assets/css/style.css; uses the same navy/teal tokens. */
+
+/* ---- language switch: every text block carries .l-en and .l-ar, one is hidden ---- */
+html[data-lang="en"] .l-ar { display: none !important; }
+html[data-lang="ar"] .l-en { display: none !important; }
+html[data-lang="ar"] .btn { letter-spacing: 0; text-transform: none; }
+html[data-lang="ar"] .badge { letter-spacing: 0; text-transform: none; }
+
+body.c35 { background: var(--c-bg-page); }
+.nw { white-space: nowrap; }
+
+/* ---- header ---- */
+.c35-header { background: #fff; border-bottom: 1px solid var(--c-border); box-shadow: var(--shadow-sm); }
+.c35-header-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 0.6rem; padding-bottom: 0.6rem; }
+.c35-header .brand-wrapper { max-height: none; }
+.c35-lang { display: inline-flex; gap: 0.25rem; flex-shrink: 0; }
+.c35-lang button {
+  font: inherit; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+  padding: 0.4rem 0.8rem; border-radius: var(--radius-full);
+  border: 1px solid var(--c-border); background: #fff; color: var(--c-navy-900);
+}
+.c35-lang button.active { background: var(--c-navy-850); border-color: var(--c-navy-850); color: #fff; }
+
+/* ---- hero ---- */
+.c35-hero { padding: clamp(2rem, 5vw, 3.5rem) 0; }
+.c35-title { font-size: clamp(1.5rem, 4.2vw, 2.4rem); line-height: 1.25; margin: 0.6rem auto 0.4rem; max-width: 880px; color: #fff; }
+.c35-meta { color: #cbd5e1; font-size: clamp(0.9rem, 2vw, 1.05rem); margin: 0 auto; }
+.c35-credit { color: #9fb6cc; font-size: 0.85rem; margin: 0.6rem auto 0; max-width: 720px; }
+.c35-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 1.5rem; }
+.c35-btn-light { color: #fff; border-color: rgba(255, 255, 255, 0.6); background: transparent; }
+.c35-btn-light:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+
+/* ---- gallery (masonry columns so tall and wide photos sit together) ---- */
+.gallery { column-count: 1; column-gap: 1.25rem; }
+@media (min-width: 640px) { .gallery { column-count: 2; } }
+@media (min-width: 1040px) { .gallery { column-count: 3; } }
+.shot {
+  break-inside: avoid; margin: 0 0 1.25rem; background: #fff;
+  border: 1px solid var(--c-border); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-xs);
+}
+.shot-link { display: block; cursor: zoom-in; background: var(--c-navy-950); }
+.shot img { display: block; width: 100%; height: auto; }
+.shot figcaption { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.7rem 0.9rem; font-size: 0.85rem; color: var(--c-text-main); }
+.shot-cap { font-weight: 600; }
+.shot-dl { flex-shrink: 0; font-weight: 700; font-size: 0.8rem; color: var(--c-teal-700); text-decoration: none; border: 1px solid var(--c-border-teal); border-radius: var(--radius-full); padding: 0.3rem 0.8rem; }
+.shot-dl:hover { background: var(--c-teal-50); }
+
+/* ---- media sponsor card (kept modest: it sits below the photos) ---- */
+.c35-sponsor { padding-top: 0.5rem; }
+.sponsor-card {
+  display: flex; flex-direction: column; gap: 1.25rem; align-items: flex-start;
+  background: #fff; border: 1px solid var(--c-border); border-top: 3px solid var(--c-teal-600);
+  border-radius: var(--radius-md); padding: clamp(1.1rem, 3vw, 2rem); box-shadow: var(--shadow-xs);
+}
+@media (min-width: 760px) { .sponsor-card { flex-direction: row; gap: 2rem; } }
+.sponsor-logo { flex-shrink: 0; }
+.sponsor-logo img { display: block; height: 48px; width: auto; }
+.sponsor-body h3 { font-size: clamp(1.15rem, 2.4vw, 1.5rem); margin: 0.5rem 0 0.6rem; color: var(--c-navy-900); }
+.sponsor-body p { margin: 0 0 0.7rem; color: var(--c-text-muted); font-size: 0.95rem; line-height: 1.7; }
+.sponsor-body a:not(.btn) { color: var(--c-teal-700); font-weight: 600; }
+.sponsor-cta { color: var(--c-text-main) !important; font-weight: 600; }
+.sponsor-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.9rem 0 0.6rem; }
+.sponsor-links .btn-outline { color: var(--c-navy-850); border-color: var(--c-navy-850); }
+.sponsor-contact { font-size: 0.85rem !important; color: var(--c-text-light) !important; }
+
+/* ---- footer ---- */
+.c35-footer { background: var(--c-navy-950); color: #b8c7d6; padding: 1.75rem 0; font-size: 0.8rem; line-height: 1.7; }
+.c35-footer p { margin: 0 0 0.4rem; }
+.c35-footer a { color: #8fe3d1; }
+
+/* ---- lightbox ---- */
+.c35-lightbox { position: fixed; inset: 0; z-index: 1000; background: rgba(3, 16, 32, 0.94); display: flex; align-items: center; justify-content: center; padding: 3.2rem 0.5rem 1rem; }
+.c35-lightbox[hidden] { display: none; }
+.lb-figure { margin: 0; max-width: min(96vw, 1400px); display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+.lb-img { max-width: 100%; max-height: calc(100vh - 8rem); width: auto; height: auto; border-radius: var(--radius-sm); background: #000; }
+.lb-cap { color: #e5edf5; font-size: 0.9rem; text-align: center; }
+.lb-dl { margin-inline-start: 0.6rem; color: #8fe3d1; font-weight: 700; text-decoration: none; border: 1px solid rgba(143, 227, 209, 0.5); border-radius: var(--radius-full); padding: 0.25rem 0.8rem; }
+.lb-close, .lb-nav { position: absolute; background: rgba(255, 255, 255, 0.12); color: #fff; border: 0; cursor: pointer; line-height: 1; border-radius: 50%; width: 2.75rem; height: 2.75rem; font-size: 1.6rem; }
+.lb-close { top: 0.7rem; right: 0.7rem; }
+.lb-nav { top: 50%; transform: translateY(-50%); font-size: 2rem; }
+.lb-prev { left: 0.5rem; }
+.lb-next { right: 0.5rem; }
+.lb-close:hover, .lb-nav:hover { background: rgba(255, 255, 255, 0.25); }
+
+/* ---- print: the sponsor brochure only ---- */
+@page { margin: 18mm; }
+@media print {
+  .c35-header, .c35-hero, .c35-gallery-section, .c35-footer, .c35-lightbox { display: none !important; }
+  body.c35 { background: #fff; }
+  .c35-sponsor { padding: 0; }
+  .sponsor-card { border: 0; border-top: 3px solid var(--c-teal-600); box-shadow: none; flex-direction: column; }
+  .sponsor-links { display: none; }
+}

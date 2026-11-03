@@ -1,0 +1,58 @@
+{
+  "event": {
+    "name_en": "35th IMA UK & EU International Medical Conference",
+    "name_ar": "المؤتمر الطبي الدولي الخامس والثلاثون للجمعية الطبية العراقية في المملكة المتحدة وأوروبا",
+    "place_en": "Kingston upon Thames",
+    "place_ar": "كينغستون أبون التايمز",
+    "dates_en": "31 October – 1 November 2026",
+    "dates_ar": "٣١ تشرين الأول – ١ تشرين الثاني ٢٠٢٦",
+    "frame_line_1": "35th IMA UK & EU International Medical Conference",
+    "frame_line_2": "Kingston upon Thames · 31 Oct – 1 Nov 2026"
+  },
+  "pages": {
+    "uk": "uk-0ab1e3",
+    "iq": "iq-efd243"
+  },
+  "photos": [
+    {
+      "slug": "delegates-1",
+      "src": "20261031_130912(0).jpg",
+      "en": "Delegates of the 35th conference",
+      "ar": "المشاركون في المؤتمر الخامس والثلاثين",
+      "alt_en": "Group photo of the delegates seated and standing in the conference hall next to the 35th IMA UK & EU banner",
+      "alt_ar": "صورة جماعية للمشاركين في قاعة المؤتمر بجانب لافتة المؤتمر الخامس والثلاثين"
+    },
+    {
+      "slug": "delegates-hall",
+      "src": "20261031_130855.jpg",
+      "en": "The conference hall",
+      "ar": "قاعة المؤتمر",
+      "alt_en": "Wide view of the conference hall with the delegates' group photo and two roll-up banners",
+      "alt_ar": "منظر واسع لقاعة المؤتمر مع الصورة الجماعية للمشاركين"
+    },
+    {
+      "slug": "delegates-2",
+      "src": "20261031_130945.jpg",
+      "en": "Delegates, group photo",
+      "ar": "صورة جماعية للمشاركين",
+      "alt_en": "Delegates posing for the group photo between the two conference banners",
+      "alt_ar": "المشاركون يلتقطون الصورة الجماعية بين لافتتي المؤتمر"
+    },
+    {
+      "slug": "certificates",
+      "src": "20261031_153601.jpg",
+      "en": "On stage: certificate presentation",
+      "ar": "على المنصة: تسليم الشهادات",
+      "alt_en": "Three people on stage holding certificates in front of the conference backdrop",
+      "alt_ar": "ثلاثة أشخاص على المنصة يحملون شهادات أمام خلفية المؤتمر"
+    },
+    {
+      "slug": "group-photo-call",
+      "src": "20261031_111821.jpg",
+      "en": "Group photo, 31 October",
+      "ar": "صورة جماعية، ٣١ تشرين الأول",
+      "alt_en": "Five men in suits standing between the Care Grid and Iraqi Medical Association roll-up banners",
+      "alt_ar": "خمسة رجال بملابس رسمية واقفون بين لافتتي كير گرد والجمعية الطبية العراقية"
+    }
+  ]
+}
