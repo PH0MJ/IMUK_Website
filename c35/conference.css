@@ -81,6 +81,19 @@ body.c35 { background: var(--c-bg-page); }
 .lb-prev { left: 0.5rem; }
 .lb-next { right: 0.5rem; }
 .lb-close:hover, .lb-nav:hover { background: rgba(255, 255, 255, 0.25); }
+.lb-figure { position: relative; }
+/* --ar (set from the thumbnail) sizes the thumbnail and the full photo identically, so nothing jumps on swap */
+.lb-img { width: min(96vw, 1400px, calc((100vh - 8rem) * var(--ar, 100))); object-fit: contain; }
+.lb-figure.loading .lb-img { opacity: 0.8; }
+.lb-figure.loading::after {
+  content: ""; position: absolute; top: calc(50% - 4rem); left: calc(50% - 1.4rem); width: 2.8rem; height: 2.8rem;
+  border: 3px solid rgba(255, 255, 255, 0.35); border-top-color: #8fe3d1; border-radius: 50%;
+  animation: lb-spin 0.9s linear infinite; pointer-events: none;
+}
+@keyframes lb-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .lb-figure.loading::after { animation-duration: 3s; } }
+.lb-fail { display: none; color: #ffd9a0; font-size: 0.85rem; margin-top: 0.4rem; }
+.lb-figure.failed .lb-fail { display: block; }
 
 /* ---- print: the sponsor brochure only ---- */
 @page { margin: 18mm; }
