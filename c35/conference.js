@@ -57,11 +57,29 @@
   });
 
   document.querySelectorAll('[data-set-lang]').forEach(function (b) {
-    b.addEventListener('click', function () { setLang(b.getAttribute('data-set-lang')); });
+    b.addEventListener('click', function () {
+      var l = b.getAttribute('data-set-lang');
+      setLang(l);
+      try { localStorage.setItem('ima_language', l); } catch (e) {}
+    });
   });
   document.querySelectorAll('[data-print]').forEach(function (b) {
     b.addEventListener('click', function () { window.print(); });
   });
 
-  setLang(lang());
+  // Start in the language chosen on the main site (same key it uses); ?lang=ar|en overrides.
+  // The Arabic page for attendees from Iraq always starts in Arabic.
+  function initialLang() {
+    var q = new URLSearchParams(window.location.search).get('lang');
+    if (q === 'ar' || q === 'en') return q;
+    if (document.body.classList.contains('c35-uk')) {
+      try {
+        var s = localStorage.getItem('ima_language');
+        if (s === 'ar' || s === 'en') return s;
+      } catch (e) {}
+    }
+    return lang();
+  }
+
+  setLang(initialLang());
 })();
