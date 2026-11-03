@@ -320,9 +320,10 @@ def main():
     for p in photos:
         g = gmap[p["group"]]
         n = counters[p["group"]] = counters.get(p["group"], 0) + 1
-        p["en"] = f"{g['caption_en']} · {n}"
-        p["ar"] = f"{g['caption_ar']} · {arabic_digits(n)}"
-        p["alt_en"], p["alt_ar"] = g["alt_en"], g["alt_ar"]
+        p.setdefault("en", f"{g['caption_en']} · {n}")
+        p.setdefault("ar", f"{g['caption_ar']} · {arabic_digits(n)}")
+        p.setdefault("alt_en", g["alt_en"])
+        p.setdefault("alt_ar", g["alt_ar"])
         p["dl"] = f"IMA-UK-EU-35th-conference-{p['group']}-{n:02d}.jpg"
 
     keep = {p["slug"] + ".jpg" for p in photos}

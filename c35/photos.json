@@ -16,7 +16,7 @@
   "photos": [
     {
       "slug": "delegates-130912-b",
-      "src": "20261031_130912(0).jpg",
+      "src": "album/20261031_130912(0).jpg",
       "group": "delegates",
       "crop": [
         0.0,
@@ -27,7 +27,7 @@
     },
     {
       "slug": "delegates-130945",
-      "src": "20261031_130945.jpg",
+      "src": "album/20261031_130945.jpg",
       "group": "delegates",
       "crop": [
         0.02,
@@ -38,7 +38,7 @@
     },
     {
       "slug": "delegates-131009",
-      "src": "20261031_131009.jpg",
+      "src": "album/20261031_131009.jpg",
       "group": "delegates",
       "crop": [
         0.0,
@@ -48,19 +48,52 @@
       ]
     },
     {
-      "slug": "stage-153601",
-      "src": "20261031_153601.jpg",
-      "group": "stage",
+      "slug": "sessions-105950",
+      "src": "drive/20261031_105950.jpg",
+      "group": "sessions",
       "crop": [
         0.0,
-        0.12,
+        0.0,
         1.0,
-        0.8
+        0.92
+      ]
+    },
+    {
+      "slug": "sessions-112147",
+      "src": "drive/20261031_112147.jpg",
+      "group": "sessions",
+      "crop": [
+        0.0,
+        0.0,
+        1.0,
+        0.9
+      ]
+    },
+    {
+      "slug": "sessions-124039",
+      "src": "drive/20261031_124039.jpg",
+      "group": "sessions",
+      "crop": [
+        0.0,
+        0.0,
+        1.0,
+        0.92
+      ]
+    },
+    {
+      "slug": "sessions-143037",
+      "src": "drive/20261031_143037.jpg",
+      "group": "sessions",
+      "crop": [
+        0.0,
+        0.04,
+        1.0,
+        0.96
       ]
     },
     {
       "slug": "stage-153553",
-      "src": "20261031_153553.jpg",
+      "src": "album/20261031_153553.jpg",
       "group": "stage",
       "crop": [
         0.0,
@@ -70,8 +103,41 @@
       ]
     },
     {
+      "slug": "stage-153601",
+      "src": "album/20261031_153601.jpg",
+      "group": "stage",
+      "crop": [
+        0.0,
+        0.12,
+        1.0,
+        0.8
+      ]
+    },
+    {
+      "slug": "stage-100432",
+      "src": "drive/20261101_100432.jpg",
+      "group": "stage",
+      "crop": [
+        0.0,
+        0.0,
+        1.0,
+        0.95
+      ]
+    },
+    {
+      "slug": "stage-110254",
+      "src": "drive/20261101_110254.jpg",
+      "group": "stage",
+      "crop": [
+        0.0,
+        0.05,
+        1.0,
+        1.0
+      ]
+    },
+    {
       "slug": "group-photo-111821",
-      "src": "20261031_111821.jpg",
+      "src": "album/20261031_111821.jpg",
       "group": "group-photo",
       "crop": [
         0.0,
@@ -81,8 +147,19 @@
       ]
     },
     {
+      "slug": "group-photo-083846",
+      "src": "drive/20261101_083846.jpg",
+      "group": "group-photo",
+      "crop": [
+        0.0,
+        0.05,
+        1.0,
+        0.95
+      ]
+    },
+    {
       "slug": "around-134457",
-      "src": "20261031_134457.jpg",
+      "src": "album/20261031_134457.jpg",
       "group": "around",
       "crop": [
         0.0,
@@ -93,7 +170,7 @@
     },
     {
       "slug": "around-134552",
-      "src": "20261031_134552.jpg",
+      "src": "album/20261031_134552.jpg",
       "group": "around",
       "crop": [
         0.0,
@@ -101,6 +178,21 @@
         0.8,
         1.0
       ]
+    },
+    {
+      "slug": "around-084823",
+      "src": "drive/20261101_084823.jpg",
+      "group": "around",
+      "crop": [
+        0.0,
+        0.0,
+        1.0,
+        0.95
+      ],
+      "en": "The conference roll-ups",
+      "ar": "لافتات المؤتمر",
+      "alt_en": "The Care Grid and Iraqi Medical Association roll-up banners side by side",
+      "alt_ar": "لافتتا كير گرد والجمعية الطبية العراقية جنباً إلى جنب"
     }
   ],
   "groups": [
@@ -112,6 +204,15 @@
       "caption_ar": "صورة جماعية للمشاركين",
       "alt_en": "Delegates posing for the group photo in the conference hall",
       "alt_ar": "المشاركون يلتقطون الصورة الجماعية في قاعة المؤتمر"
+    },
+    {
+      "key": "sessions",
+      "en": "From the sessions",
+      "ar": "من الجلسات",
+      "caption_en": "Session talk",
+      "caption_ar": "من إحدى الجلسات",
+      "alt_en": "A speaker presenting during a conference session",
+      "alt_ar": "متحدث يقدّم محاضرته خلال إحدى جلسات المؤتمر"
     },
     {
       "key": "stage",
