@@ -92,6 +92,17 @@
       ]
     },
     {
+      "slug": "sessions-093352",
+      "src": "album/20261101_093352.jpg",
+      "group": "sessions",
+      "crop": [
+        0.0,
+        0.2,
+        1.0,
+        0.95
+      ]
+    },
+    {
       "slug": "stage-153553",
       "src": "album/20261031_153553.jpg",
       "group": "stage",
@@ -136,6 +147,28 @@
       ]
     },
     {
+      "slug": "stage-125729",
+      "src": "album/20261101_125729.jpg",
+      "group": "stage",
+      "crop": [
+        0.1,
+        0.04,
+        1.0,
+        0.96
+      ]
+    },
+    {
+      "slug": "stage-131946",
+      "src": "album/20261101_131946.jpg",
+      "group": "stage",
+      "crop": [
+        0.0,
+        0.04,
+        1.0,
+        0.96
+      ]
+    },
+    {
       "slug": "group-photo-111821",
       "src": "album/20261031_111821.jpg",
       "group": "group-photo",
@@ -176,6 +209,17 @@
         0.0,
         0.0,
         0.8,
+        1.0
+      ]
+    },
+    {
+      "slug": "around-134515",
+      "src": "album/20261031_134515.jpg",
+      "group": "around",
+      "crop": [
+        0.08,
+        0.0,
+        1.0,
         1.0
       ]
     },
