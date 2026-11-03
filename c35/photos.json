@@ -26,28 +26,6 @@
       ]
     },
     {
-      "slug": "delegates-130945",
-      "src": "album/20261031_130945.jpg",
-      "group": "delegates",
-      "crop": [
-        0.1,
-        0.24,
-        0.95,
-        0.7
-      ]
-    },
-    {
-      "slug": "delegates-131009",
-      "src": "album/20261031_131009.jpg",
-      "group": "delegates",
-      "crop": [
-        0.14,
-        0.22,
-        0.97,
-        0.7
-      ]
-    },
-    {
       "slug": "sessions-105950",
       "src": "drive/20261031_105950.jpg",
       "group": "sessions",
@@ -222,21 +200,6 @@
         1.0,
         1.0
       ]
-    },
-    {
-      "slug": "around-084823",
-      "src": "drive/20261101_084823.jpg",
-      "group": "around",
-      "crop": [
-        0.0,
-        0.0,
-        1.0,
-        0.95
-      ],
-      "en": "The conference roll-ups",
-      "ar": "لافتات المؤتمر",
-      "alt_en": "The Care Grid and Iraqi Medical Association roll-up banners side by side",
-      "alt_ar": "لافتتا كير گرد والجمعية الطبية العراقية جنباً إلى جنب"
     }
   ],
   "groups": [
