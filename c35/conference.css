@@ -34,6 +34,9 @@ body.c35 { background: var(--c-bg-page); }
 .gallery { column-count: 1; column-gap: 1.25rem; }
 @media (min-width: 640px) { .gallery { column-count: 2; } }
 @media (min-width: 1040px) { .gallery { column-count: 3; } }
+.gallery.gallery-single { column-count: 1; }
+.gallery-single .shot { margin-bottom: 0; }
+.gallery-single .shot figcaption { font-size: 0.95rem; padding: 0.85rem 1.1rem; }
 .shot {
   break-inside: avoid; margin: 0 0 1.25rem; background: #fff;
   border: 1px solid var(--c-border); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-xs);

@@ -128,12 +128,14 @@ def arabic_digits(n):
     return str(n).translate(str.maketrans("0123456789", "٠١٢٣٤٥٦٧٨٩"))
 
 
-def shot(p):
+def shot(p, wide=False):
     link = f"../photos/{p['slug']}.jpg"
     dl = p["dl"]
-    return f"""      <figure class="shot">
+    # a lone panorama is shown full width, so the browser may pick the full-size file instead of the 800 px thumbnail
+    srcset = f' srcset="../thumbs/{p["slug"]}.jpg {p["tw"]}w, {link} {MAX_SIDE}w" sizes="(min-width: 1240px) 1180px, 96vw"' if wide else ""
+    return f"""      <figure class="shot{' shot-wide' if wide else ''}">
         <a href="{link}" class="shot-link" data-lightbox data-en="{esc(p['en'])}" data-ar="{esc(p['ar'])}" data-download="{dl}">
-          <img src="../thumbs/{p['slug']}.jpg" width="{p['tw']}" height="{p['th']}" alt="{esc(p['alt_en'])}" data-alt-ar="{esc(p['alt_ar'])}" loading="lazy" />
+          <img src="../thumbs/{p['slug']}.jpg"{srcset} width="{p['tw']}" height="{p['th']}" alt="{esc(p['alt_en'])}" data-alt-ar="{esc(p['alt_ar'])}" loading="lazy" />
         </a>
         <figcaption>
           <span class="shot-cap">{bi(esc(p['en']), esc(p['ar']))}</span>
@@ -277,9 +279,12 @@ def page(kind, event, groups, photos, zip_mb):
         for g in groups)
     sections = []
     for g in groups:
-        items = "\n".join(shot(p) for p in photos if p["group"] == g["key"])
+        group_photos = [p for p in photos if p["group"] == g["key"]]
+        # one wide photo in a section (e.g. the delegates' panorama) gets the whole row, not a third of it
+        single = len(group_photos) == 1 and group_photos[0]["tw"] / group_photos[0]["th"] >= 1.8
+        items = "\n".join(shot(p, wide=single) for p in group_photos)
         sections.append(f"""      <h3 class="gallery-title" id="g-{g['key']}">{bi(esc(g['en']), esc(g['ar']))}</h3>
-      <div class="gallery">
+      <div class="gallery{' gallery-single' if single else ''}">
 {items}
       </div>""")
     body = f"""<body class="c35 c35-{kind}">
@@ -317,12 +322,15 @@ def main():
     (C35 / "thumbs").mkdir(exist_ok=True)
 
     # captions, alt text and download names come from the group + the photo's number inside it
+    # (a photo that is alone in its group gets no number)
     counters = {}
+    sizes = {k: sum(1 for p in photos if p["group"] == k) for k in gmap}
     for p in photos:
         g = gmap[p["group"]]
         n = counters[p["group"]] = counters.get(p["group"], 0) + 1
-        p.setdefault("en", f"{g['caption_en']} · {n}")
-        p.setdefault("ar", f"{g['caption_ar']} · {arabic_digits(n)}")
+        alone = sizes[p["group"]] == 1
+        p.setdefault("en", g["caption_en"] if alone else f"{g['caption_en']} · {n}")
+        p.setdefault("ar", g["caption_ar"] if alone else f"{g['caption_ar']} · {arabic_digits(n)}")
         p.setdefault("alt_en", g["alt_en"])
         p.setdefault("alt_ar", g["alt_ar"])
         p["dl"] = f"IMA-UK-EU-35th-conference-{p['group']}-{n:02d}.jpg"
