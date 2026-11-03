@@ -9,7 +9,8 @@ Reads c35/photos.json, then writes into c35/:
 
 The original photos are NOT kept in the repo. Point --src at the folder that holds them
 (file names are listed in c35/photos.json). To add photos later, add an entry to
-photos.json and run this script again.
+photos.json (give it a "group") and run this script again; existing photos are kept
+unless you pass --force (needed after changing the frame design).
 
 usage: python tools/build_conference_gallery.py --src "C:/path/to/original/photos"
 """
@@ -34,7 +35,8 @@ TEAL = (6, 158, 133)
 WHITE = (255, 255, 255)
 MUTED = (100, 122, 146)
 MAX_SIDE = 2400
-THUMB_SIDE = 960
+THUMB_SIDE = 800
+QUALITY = 82
 ZIP_NAME = "IMA-UK-EU-35th-Conference-Photos.zip"
 WHATSAPP = "9647823997303"
 EMAIL = "founders@caregr.id"
@@ -112,9 +114,13 @@ def esc(s):
     return html.escape(s, quote=True)
 
 
-def shot(p, n):
+def arabic_digits(n):
+    return str(n).translate(str.maketrans("0123456789", "٠١٢٣٤٥٦٧٨٩"))
+
+
+def shot(p):
     link = f"../photos/{p['slug']}.jpg"
-    dl = f"IMA-UK-EU-35th-conference-{n:02d}-{p['slug']}.jpg"
+    dl = p["dl"]
     return f"""      <figure class="shot">
         <a href="{link}" class="shot-link" data-lightbox data-en="{esc(p['en'])}" data-ar="{esc(p['ar'])}" data-download="{dl}">
           <img src="../thumbs/{p['slug']}.jpg" width="{p['tw']}" height="{p['th']}" alt="{esc(p['alt_en'])}" data-alt-ar="{esc(p['alt_ar'])}" loading="lazy" />
@@ -163,7 +169,7 @@ def header():
   </header>"""
 
 
-def hero(event, lang, with_print):
+def hero(event, lang, with_print, zip_mb):
     print_btn = (f'<button type="button" class="btn btn-outline c35-btn-light" data-print>{bi("Print brochure", "طباعة البروشور")}</button>'
                  if with_print else "")
     return f"""  <section class="hero-royal c35-hero">
@@ -173,7 +179,7 @@ def hero(event, lang, with_print):
       <p class="c35-meta">{bi(esc(event['place_en'] + ' · ' + event['dates_en']), esc(event['place_ar'] + ' · ' + event['dates_ar']))}</p>
       <p class="c35-credit">{bi('In cooperation with the Iraqi Red Crescent Society · Media sponsor: Care Grid', 'بالتعاون مع جمعية الهلال الأحمر العراقي · الراعي الإعلامي: كير گرد')}</p>
       <div class="c35-actions">
-        <a class="btn btn-gold" href="../{ZIP_NAME}" download>{bi('Download all photos (ZIP)', 'تحميل كل الصور (ZIP)')}</a>
+        <a class="btn btn-gold" href="../{ZIP_NAME}" download>{bi(f'Download all photos (ZIP, {zip_mb} MB)', f'تحميل كل الصور (ZIP، {arabic_digits(zip_mb)} ميغابايت)')}</a>
         {print_btn}
       </div>
     </div>
@@ -247,7 +253,7 @@ def footer():
 </html>"""
 
 
-def page(kind, event, photos):
+def page(kind, event, groups, photos, zip_mb):
     lang = "en" if kind == "uk" else "ar"
     if kind == "uk":
         title = "35th IMA UK & EU International Medical Conference: photographs"
@@ -255,17 +261,27 @@ def page(kind, event, photos):
     else:
         title = "صور المؤتمر الطبي الدولي الخامس والثلاثين للجمعية الطبية العراقية"
         desc = "صور من المؤتمر الطبي الدولي الخامس والثلاثين، تُشارك مع الحاضرين."
-    gallery = "\n".join(shot(p, i + 1) for i, p in enumerate(photos))
+    jump = "\n".join(
+        f'        <a href="#g-{g["key"]}">{bi(esc(g["en"]), esc(g["ar"]))} <span class="count">{sum(1 for p in photos if p["group"] == g["key"])}</span></a>'
+        for g in groups)
+    sections = []
+    for g in groups:
+        items = "\n".join(shot(p) for p in photos if p["group"] == g["key"])
+        sections.append(f"""      <h3 class="gallery-title" id="g-{g['key']}">{bi(esc(g['en']), esc(g['ar']))}</h3>
+      <div class="gallery">
+{items}
+      </div>""")
     body = f"""<body class="c35 c35-{kind}">
 {header()}
 
-{hero(event, lang, with_print=(kind == 'uk'))}
+{hero(event, lang, with_print=(kind == 'uk'), zip_mb=zip_mb)}
 
   <section class="section c35-gallery-section">
     <div class="container">
-      <div class="gallery">
-{gallery}
-      </div>
+      <nav class="c35-jump" aria-label="Sections">
+{jump}
+      </nav>
+{chr(10).join(sections)}
     </div>
   </section>
 
@@ -279,32 +295,49 @@ def page(kind, event, photos):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", required=True, help="folder with the original photos")
+    ap.add_argument("--force", action="store_true", help="re-make photos that already exist (use after changing the frame)")
     args = ap.parse_args()
     src = Path(args.src)
 
     cfg = json.loads((C35 / "photos.json").read_text(encoding="utf-8"))
-    event, pages, photos = cfg["event"], cfg["pages"], cfg["photos"]
+    event, pages, groups, photos = cfg["event"], cfg["pages"], cfg["groups"], cfg["photos"]
+    gmap = {g["key"]: g for g in groups}
     (C35 / "photos").mkdir(exist_ok=True)
     (C35 / "thumbs").mkdir(exist_ok=True)
 
+    # captions, alt text and download names come from the group + the photo's number inside it
+    counters = {}
     for p in photos:
-        framed = add_frame(Image.open(src / p["src"]), event)
-        framed.save(C35 / "photos" / f"{p['slug']}.jpg", quality=86, optimize=True, progressive=True)
-        thumb = framed.copy()
-        thumb.thumbnail((THUMB_SIDE, THUMB_SIDE), Image.LANCZOS)
-        thumb.save(C35 / "thumbs" / f"{p['slug']}.jpg", quality=80, optimize=True, progressive=True)
-        p["tw"], p["th"] = thumb.size
-        print("framed", p["slug"], framed.size)
+        g = gmap[p["group"]]
+        n = counters[p["group"]] = counters.get(p["group"], 0) + 1
+        p["en"] = f"{g['caption_en']} · {n}"
+        p["ar"] = f"{g['caption_ar']} · {arabic_digits(n)}"
+        p["alt_en"], p["alt_ar"] = g["alt_en"], g["alt_ar"]
+        p["dl"] = f"IMA-UK-EU-35th-conference-{p['group']}-{n:02d}.jpg"
+
+    for p in photos:
+        full, thumb_path = C35 / "photos" / f"{p['slug']}.jpg", C35 / "thumbs" / f"{p['slug']}.jpg"
+        if args.force or not (full.exists() and thumb_path.exists()):
+            framed = add_frame(Image.open(src / p["src"]), event)
+            framed.save(full, quality=QUALITY, optimize=True, progressive=True)
+            thumb = framed.copy()
+            thumb.thumbnail((THUMB_SIDE, THUMB_SIDE), Image.LANCZOS)
+            thumb.save(thumb_path, quality=78, optimize=True, progressive=True)
+            print("framed", p["slug"], framed.size)
+        with Image.open(thumb_path) as t:
+            p["tw"], p["th"] = t.size
 
     with zipfile.ZipFile(C35 / ZIP_NAME, "w", zipfile.ZIP_STORED) as z:
-        for i, p in enumerate(photos, 1):
-            z.write(C35 / "photos" / f"{p['slug']}.jpg", f"IMA-UK-EU-35th-conference-{i:02d}-{p['slug']}.jpg")
+        for p in photos:
+            z.write(C35 / "photos" / f"{p['slug']}.jpg", p["dl"])
+    zip_mb = round((C35 / ZIP_NAME).stat().st_size / 1e6)
 
     for kind in ("uk", "iq"):
         out = C35 / pages[kind]
         out.mkdir(exist_ok=True)
-        (out / "index.html").write_text(page(kind, event, photos), encoding="utf-8")
+        (out / "index.html").write_text(page(kind, event, groups, photos, zip_mb), encoding="utf-8")
         print("wrote", out / "index.html")
+    print(f"{len(photos)} photos, ZIP {zip_mb} MB")
 
 
 if __name__ == "__main__":
