@@ -199,6 +199,8 @@ def hero(event, lang, with_print, zip_mb):
 
 
 def sponsor_uk():
+    # Owner note: the UK & Europe page informs about Care Grid but does not invite anyone to use it
+    # (no contact details, no links, no call to action). Only the Iraq page does that.
     return f"""  <section class="section c35-sponsor" id="care-grid">
     <div class="container">
       <div class="sponsor-card">
@@ -206,39 +208,61 @@ def sponsor_uk():
         <div class="sponsor-body">
           <span class="badge badge-navy">{bi('About Care Grid', 'عن كير گرد')}</span>
           <h3>{bi('Care Grid: smart healthcare, made for Iraq', 'كير گرد: رعاية صحية ذكية صُنعت للعراق')}</h3>
-          <p>{bi('Care Grid is a healthcare platform founded in Iraq and the UK. Its first product, Clinic Grid, is available now: appointments and the walk-in queue, patient files, visits and prescriptions, and referrals with WhatsApp reminders.',
-                 'كير گرد منصة رعاية صحية تأسست في العراق وبريطانيا. أول منتجاتها Clinic Grid متاح الآن: المواعيد وطابور المراجعين، وملف المريض والزيارات والوصفات، والتحويلات وتذكيرات الواتساب.', 'span')}</p>
-          <p>{bi('Lab Grid, Pharma Grid and Hospital Grid are coming soon.', 'Lab Grid وPharma Grid وHospital Grid قريباً.', 'span')}</p>
-          <p>{bi(f'To learn more, write to <a href="mailto:{EMAIL}?subject=Care%20Grid%20(from%20the%20IMA%20conference%20photos)">{EMAIL}</a> or visit <a href="https://caregr.id" target="_blank" rel="noopener noreferrer">caregr.id</a>.',
-                 f'لمعرفة المزيد راسلونا على <a href="mailto:{EMAIL}?subject=Care%20Grid%20(from%20the%20IMA%20conference%20photos)">{EMAIL}</a> أو زوروا <a href="https://caregr.id" target="_blank" rel="noopener noreferrer">caregr.id</a>.', 'span')}</p>
+          <p>{bi('Care Grid is a healthcare technology company founded in Iraq and the UK. It builds connected software for Iraqi healthcare, so that clinics, laboratories, pharmacies and hospitals can work from one shared patient record.',
+                 'كير گرد شركة تقنية صحية تأسست في العراق وبريطانيا، تبني برمجيات مترابطة للقطاع الصحي العراقي حتى تشتغل العيادات والمختبرات والصيدليات والمستشفيات على ملف مريض واحد مشترك.', 'span')}</p>
+          <p>{bi('Its first product, Clinic Grid, is in use at private clinics and health centres in Baghdad, Najaf and Babylon.',
+                 'أول منتجاتها، Clinic Grid، يُستخدم اليوم في عيادات خاصة ومراكز صحية في بغداد والنجف وبابل.', 'span')}</p>
         </div>
       </div>
+    </div>
+  </section>"""
+
+
+def wa_link():
+    text = urllib.parse.quote("مرحباً، شفت صور مؤتمر لندن وأحب أشوف شلون يشتغل كير گرد بعيادتي")
+    return f"https://wa.me/{WHATSAPP}?text={text}"
+
+
+def promo_iq():
+    """Care Grid band under the hero of the Iraq page only: the page is meant for direct contact."""
+    return f"""  <section class="c35-promo" aria-label="Care Grid">
+    <div class="container c35-promo-row">
+      <img class="c35-promo-logo" src="../assets/caregrid-lockup.png" alt="Care Grid" width="160" height="38" />
+      <p class="c35-promo-text">{bi('Clinic Grid is already in use at clinics and health centres in Baghdad, Najaf and Babylon: patient files, appointments, prescriptions and referrals in one place.',
+                 'Clinic Grid يشتغل اليوم بعيادات ومراكز صحية في بغداد والنجف وبابل: ملف المريض والمواعيد والوصفات والتحويلات بمكان واحد.', 'span')}</p>
+      <a class="btn c35-promo-btn" href="{wa_link()}" target="_blank" rel="noopener noreferrer">{bi('Message us on WhatsApp', 'راسلنا على الواتساب')}</a>
     </div>
   </section>"""
 
 
 def sponsor_iq():
-    wa_text = urllib.parse.quote("مرحباً، شفت صور مؤتمر لندن وأحب أشوف شلون يشتغل كير گرد بعيادتي")
-    return f"""  <section class="section c35-sponsor" id="care-grid">
+    return f"""  <section class="c35-sponsor c35-sponsor-iq" id="care-grid">
     <div class="container">
-      <div class="sponsor-card">
-        <div class="sponsor-logo"><img src="../assets/caregrid-lockup.png" alt="Care Grid" width="214" height="51" /></div>
-        <div class="sponsor-body">
-          <span class="badge badge-navy">{bi('About Care Grid', 'عن كير گرد')}</span>
+      <div class="iq-band">
+        <div class="iq-band-head">
+          <img src="../assets/caregrid-lockup.png" alt="Care Grid" width="214" height="51" class="iq-band-logo" />
           <h3>{bi('Care Grid: smart healthcare, made for Iraq', 'كير گرد: رعاية صحية ذكية صُنعت للعراق')}</h3>
-          <p>{bi('Care Grid’s first product, Clinic Grid, is available now for clinics in Iraq: patient files, visits and prescriptions, appointments and the walk-in queue, and referrals with WhatsApp reminders.',
-                 'أول منتجات كير گرد، Clinic Grid، متاح الآن للعيادات في العراق: ملف المريض والزيارات والوصفات، والمواعيد وطابور المراجعين، والتحويلات وتذكيرات الواتساب.', 'span')}</p>
-          <p>{bi('Coming soon: Lab Grid · Pharma Grid · Hospital Grid.', 'قريباً: <bdi>Lab Grid</bdi> · <bdi>Pharma Grid</bdi> · <bdi>Hospital Grid</bdi>', 'span')}</p>
-          <p class="sponsor-cta">{bi('Ask for a walkthrough inside your clinic: message us and let us show you how it works.', 'اطلب عرضاً داخل عيادتك: راسلنا وخلّينا نشوفك شلون يشتغل.', 'span')}</p>
+          <p>{bi('Clinic Grid, Care Grid’s first product, is available now for clinics in Iraq.', 'Clinic Grid، أول منتجات كير گرد، متاح الآن للعيادات في العراق.', 'span')}</p>
+        </div>
+        <ul class="iq-features">
+          <li>{bi('Patient file, visits and prescriptions', 'ملف المريض والزيارات والوصفات', 'span')}</li>
+          <li>{bi('Appointments and the walk-in queue', 'المواعيد وطابور المراجعين', 'span')}</li>
+          <li>{bi('Referrals and WhatsApp reminders', 'التحويلات وتذكيرات الواتساب', 'span')}</li>
+        </ul>
+        <p class="iq-soon">{bi('Coming soon: Lab Grid · Pharma Grid · Hospital Grid', 'قريباً: <bdi>Lab Grid</bdi> · <bdi>Pharma Grid</bdi> · <bdi>Hospital Grid</bdi>', 'span')}</p>
+        <div class="iq-cta">
+          <p>{bi('Ask for a walkthrough inside your clinic: message us and we will show you how it works.', 'اطلب عرضاً داخل عيادتك: راسلنا وخلّينا نشوفك شلون يشتغل.', 'span')}</p>
           <div class="sponsor-links">
-            <a class="btn btn-gold" href="https://wa.me/{WHATSAPP}?text={wa_text}" target="_blank" rel="noopener noreferrer">{bi('Message us on WhatsApp', 'راسلنا على الواتساب')}</a>
-            <a class="btn btn-outline" href="https://caregr.id" target="_blank" rel="noopener noreferrer">caregr.id</a>
+            <a class="btn c35-promo-btn" href="{wa_link()}" target="_blank" rel="noopener noreferrer">{bi('Message us on WhatsApp', 'راسلنا على الواتساب')}</a>
+            <a class="btn iq-btn-ghost" href="https://caregr.id" target="_blank" rel="noopener noreferrer">caregr.id</a>
           </div>
-          <p class="sponsor-contact"><span dir="ltr">+964 782 399 7303</span> · <a href="mailto:{EMAIL}">{EMAIL}</a></p>
+          <p class="iq-contact"><span dir="ltr">+964 782 399 7303</span> · <a href="mailto:{EMAIL}">{EMAIL}</a></p>
         </div>
       </div>
     </div>
-  </section>"""
+  </section>
+
+  <a class="c35-wa-float" href="{wa_link()}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">{bi('WhatsApp', 'واتساب')}</a>"""
 
 
 def footer():
@@ -291,7 +315,7 @@ def page(kind, event, groups, photos, zip_mb):
 {header()}
 
 {hero(event, lang, with_print=(kind == 'uk'), zip_mb=zip_mb)}
-
+{'' if kind == 'uk' else chr(10) + promo_iq() + chr(10)}
   <section class="section c35-gallery-section">
     <div class="container">
       <nav class="c35-jump" aria-label="Sections">

@@ -119,3 +119,53 @@ body.c35 { background: var(--c-bg-page); }
 .c35-jump .count, .gallery-title .count { font-size: 0.72rem; color: var(--c-text-light); font-weight: 600; }
 .gallery-title { font-size: 1.15rem; color: var(--c-navy-900); margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--c-border-teal); scroll-margin-top: 1rem; }
 .gallery-title:first-of-type { margin-top: 0.5rem; }
+
+/* ---- Iraq page only: Care Grid look (brand tokens from the Care Grid brand kit) ---- */
+.c35-iq {
+  --cg-mint: #72C6A2; --cg-mint-deep: #2B7857; --cg-mint-darkest: #194D36; --cg-mint-tint: #EBF5F0;
+  --cg-amber: #FABC2A; --cg-amber-deep: #EFA906; --cg-ink: #2C1810;
+}
+.c35-iq .c35-hero { background: linear-gradient(135deg, hsl(154 50% 18%), hsl(154 45% 26%) 60%, hsl(160 42% 32%)); }
+.c35-iq .c35-hero .badge-gold { background: var(--cg-amber); color: var(--cg-ink); }
+.c35-iq .c35-hero .btn-gold { background: var(--cg-amber); border-color: var(--cg-amber); color: var(--cg-ink); }
+.c35-iq .c35-credit { color: #cfe9dc; }
+.c35-iq .gallery-title { border-bottom-color: var(--cg-mint); }
+.c35-iq .c35-jump a:hover { border-color: var(--cg-mint-deep); color: var(--cg-mint-deep); }
+.c35-iq .shot-dl { color: var(--cg-mint-deep); border-color: var(--cg-mint); }
+.c35-iq .shot-dl:hover { background: var(--cg-mint-tint); }
+
+.c35-promo { background: var(--cg-mint-tint); border-bottom: 1px solid #d3eadf; }
+.c35-promo-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; padding-top: 1rem; padding-bottom: 1rem; }
+.c35-promo-logo { height: 34px; width: auto; flex-shrink: 0; }
+.c35-promo-text { flex: 1 1 320px; margin: 0; color: var(--cg-mint-darkest); font-weight: 600; font-size: 0.95rem; line-height: 1.7; }
+.c35-promo-btn { background: var(--cg-mint-deep); border: 1px solid var(--cg-mint-deep); color: #fff; font-weight: 700; }
+.c35-promo-btn:hover { background: var(--cg-mint-darkest); border-color: var(--cg-mint-darkest); color: #fff; }
+
+.c35-sponsor-iq { padding: 2.5rem 0 3.5rem; }
+.iq-band {
+  background: linear-gradient(135deg, hsl(154 50% 20%), hsl(154 45% 28%) 60%, hsl(160 42% 34%));
+  color: #fff; border-radius: var(--radius-md); padding: clamp(1.4rem, 4vw, 2.6rem); box-shadow: var(--shadow-sm);
+}
+.iq-band-logo { height: 46px; width: auto; background: #fff; border-radius: 10px; padding: 8px 12px; box-sizing: content-box; }
+.iq-band h3 { color: #fff; font-size: clamp(1.25rem, 3vw, 1.75rem); margin: 1rem 0 0.4rem; }
+.iq-band-head p { color: #d6efe3; margin: 0; }
+.iq-features { list-style: none; padding: 0; margin: 1.4rem 0 0.8rem; display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.iq-features li { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(114, 198, 162, 0.45); border-radius: var(--radius-sm); padding: 0.75rem 0.9rem; font-weight: 600; }
+.iq-features li::before { content: ""; display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 2px; background: var(--cg-amber); margin-inline-end: 0.55rem; vertical-align: middle; }
+.iq-soon { color: #b9dccb; font-size: 0.9rem; margin: 0 0 1.4rem; }
+.iq-cta { border-top: 1px solid rgba(255, 255, 255, 0.18); padding-top: 1.2rem; }
+.iq-cta > p:first-child { font-weight: 700; font-size: 1.05rem; margin: 0; }
+.iq-cta .c35-promo-btn { background: var(--cg-amber); border-color: var(--cg-amber); color: var(--cg-ink); }
+.iq-cta .c35-promo-btn:hover { background: var(--cg-amber-deep); border-color: var(--cg-amber-deep); color: var(--cg-ink); }
+.iq-btn-ghost { color: #fff; border: 1px solid rgba(255, 255, 255, 0.6); background: transparent; }
+.iq-btn-ghost:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+.iq-contact { font-size: 0.85rem; color: #cfe9dc; margin: 0.4rem 0 0; }
+.iq-contact a { color: #fff; }
+
+.c35-wa-float {
+  position: fixed; bottom: 1rem; inset-inline-end: 1rem; z-index: 900;
+  background: #25D366; color: #fff; font-weight: 700; text-decoration: none; font-size: 0.9rem;
+  padding: 0.7rem 1.1rem; border-radius: var(--radius-full); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+.c35-wa-float:hover { background: #1ebe5b; color: #fff; }
+@media print { .c35-wa-float, .c35-promo { display: none !important; } }
