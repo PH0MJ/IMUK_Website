@@ -81,6 +81,58 @@
       ]
     },
     {
+      "slug": "sessions-083816",
+      "src": "album/20261101_083816.jpg",
+      "group": "sessions",
+      "crop": [
+        0.08,
+        0.0,
+        1.0,
+        0.9
+      ],
+      "alt_en": "A speaker at the podium beside a slide titled Paperless at OPC gynecologist Clinic",
+      "alt_ar": "متحدث على المنصة بجانب شريحة بعنوان «Paperless at OPC gynecologist Clinic»"
+    },
+    {
+      "slug": "sessions-101834",
+      "src": "album/20261031_101834.jpg",
+      "group": "sessions",
+      "crop": [
+        0.0,
+        0.0,
+        1.0,
+        0.92
+      ]
+    },
+    {
+      "slug": "sessions-084204",
+      "src": "album/20261031_084204.jpg",
+      "group": "sessions",
+      "crop": [
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "en": "Attendees",
+      "ar": "الحضور",
+      "alt_en": "Three women attendees in the audience",
+      "alt_ar": "ثلاث مشاركات بين الحضور"
+    },
+    {
+      "slug": "sessions-131712",
+      "src": "album/20261101_131712.jpg",
+      "group": "sessions",
+      "crop": [
+        0.05,
+        0.04,
+        0.95,
+        0.96
+      ],
+      "alt_en": "A speaker at the podium beside the conference roll-up",
+      "alt_ar": "متحدثة على المنصة بجانب لافتة المؤتمر"
+    },
+    {
       "slug": "stage-153553",
       "src": "album/20261031_153553.jpg",
       "group": "stage",
@@ -147,6 +199,19 @@
       ]
     },
     {
+      "slug": "stage-134127",
+      "src": "album/20261031_134127.jpg",
+      "group": "stage",
+      "crop": [
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "alt_en": "Five people posing with a certificate in front of the conference backdrop",
+      "alt_ar": "خمسة أشخاص يلتقطون صورة مع شهادة أمام خلفية المؤتمر"
+    },
+    {
       "slug": "group-photo-111821",
       "src": "album/20261031_111821.jpg",
       "group": "group-photo",
@@ -167,6 +232,32 @@
         1.0,
         0.88
       ]
+    },
+    {
+      "slug": "group-photo-082616",
+      "src": "album/20261031_082616.jpg",
+      "group": "group-photo",
+      "crop": [
+        0.0,
+        0.08,
+        1.0,
+        1.0
+      ],
+      "alt_en": "Five men in suits standing together",
+      "alt_ar": "خمسة رجال بملابس رسمية يقفون معاً"
+    },
+    {
+      "slug": "group-photo-110135",
+      "src": "album/20261031_110135.jpg",
+      "group": "group-photo",
+      "crop": [
+        0.0,
+        0.0,
+        0.97,
+        1.0
+      ],
+      "alt_en": "Delegates posing beside the conference roll-up banner",
+      "alt_ar": "مشاركون يلتقطون صورة بجانب لافتة المؤتمر"
     },
     {
       "slug": "around-134457",
@@ -200,6 +291,71 @@
         1.0,
         1.0
       ]
+    },
+    {
+      "slug": "around-094639",
+      "src": "album/20261031_094639.jpg",
+      "group": "around",
+      "crop": [
+        0.15,
+        0.05,
+        1.0,
+        1.0
+      ],
+      "en": "Between sessions, 31 October",
+      "ar": "بين الجلسات، ٣١ تشرين الأول",
+      "alt_en": "Two men seated at a table between sessions",
+      "alt_ar": "رجلان جالسان إلى طاولة بين الجلسات"
+    },
+    {
+      "slug": "around-140834",
+      "src": "album/20261031_140834.jpg",
+      "group": "around",
+      "crop": [
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "alt_en": "A man and a woman smiling for the camera",
+      "alt_ar": "رجل وامرأة يبتسمان للكاميرا"
+    },
+    {
+      "slug": "around-143938",
+      "src": "album/20261031_143938.jpg",
+      "group": "around",
+      "crop": [
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "slug": "around-144200",
+      "src": "album/20261031_144200.jpg",
+      "group": "around",
+      "crop": [
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "slug": "around-134747",
+      "src": "album/20261031_134747.jpg",
+      "group": "around",
+      "crop": [
+        0.0,
+        0.0,
+        1.0,
+        1.0
+      ],
+      "en": "Coffee break, 31 October",
+      "ar": "استراحة القهوة، ٣١ تشرين الأول",
+      "alt_en": "Attendees talking during the coffee break",
+      "alt_ar": "مشاركون يتحدثون أثناء استراحة القهوة"
     }
   ],
   "groups": [
@@ -234,8 +390,8 @@
       "key": "group-photo",
       "en": "Group photo",
       "ar": "صورة جماعية",
-      "caption_en": "Group photo, 31 October",
-      "caption_ar": "صورة جماعية، ٣١ تشرين الأول",
+      "caption_en": "Group photo",
+      "caption_ar": "صورة جماعية",
       "alt_en": "Men in suits standing between the Care Grid and Iraqi Medical Association roll-up banners",
       "alt_ar": "رجال بملابس رسمية واقفون بين لافتتي كير گرد والجمعية الطبية العراقية"
     },
