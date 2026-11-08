@@ -2,13 +2,12 @@
  * Iraqi Medical Association UK & Europe (IMA UK)
  * Concept 1: Institutional Heritage Engine
  * Lightweight Vanilla JS (< 15KB, 0 dependencies)
- * Features: Mobile Nav, Dynamic Countdown, Form Validation, Poster Filter, Lightbox, Multilingual EN/AR Toggle
+ * Features: Mobile Nav, Form Validation, Poster Filter, Lightbox, Multilingual EN/AR Toggle
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initLanguageToggle();
   initMobileNav();
-  initCountdown();
   initRegistrationForm();
   initPosterFilters();
   initLightbox();
@@ -43,14 +42,15 @@ const translations = {
     "stat_founded": "Est. London",
     "stat_agms": "Annual AGMs",
     "stat_doctors": "Registered Members",
-    "poster_badge": "Annual General Meeting 2025",
+    "poster_badge": "Annual General Meeting 2026",
     "poster_title": "Annual Scientific Conference & AGM",
-    "poster_sub": "Keynote Symposia · RCP Approved CPD · Junior Doctor Research Posters",
+    "poster_sub": "35th International Medical Conference · Kingston upon Thames · 31 Oct – 1 Nov 2026",
     "cd_days": "Days",
     "cd_hours": "Hours",
     "cd_mins": "Mins",
     "cd_secs": "Secs",
     "agm_btn_small": "Conference Registration & Abstract Guidelines →",
+    "poster_btn_2026": "View the 2026 conference & photos →",
     "advisory_badge": "Official Security Advisory & Anti-Fraud Notice (Dated 12.05.2026):",
     "advisory_text": "The IMA UK & Europe is aware that unauthorised entities are circulating counterfeit invitations in Iraq using the association's name and logo. The IMA does <em>not</em> employ any agents or representatives inside Iraq. All official conferences, certified memberships, and registrations are coordinated exclusively through our official executive secretariat and website domain.",
     "advisory_link": "Read Full Legal Disclaimer →",
@@ -175,14 +175,15 @@ const translations = {
     "stat_founded": "سنة التأسيس في لندن",
     "stat_agms": "مؤتمرات سنوية",
     "stat_doctors": "طبيباً مؤهلاً في شبكتنا",
-    "poster_badge": "المؤتمر السنوي العام 2025",
+    "poster_badge": "المؤتمر السنوي العام 2026",
     "poster_title": "المؤتمر العلمي السنوي والاجتماع العام",
-    "poster_sub": "ندوات استشارية · نقاط معتمدة من الكلية الملكية · مسابقة أبحاث الأطباء المقيمين",
+    "poster_sub": "المؤتمر الطبي الدولي الخامس والثلاثين · كينغستون أبون التايمز · ٣١ تشرين الأول – ١ تشرين الثاني ٢٠٢٦",
     "cd_days": "أيام",
     "cd_hours": "ساعات",
     "cd_mins": "دقائق",
     "cd_secs": "ثواني",
     "agm_btn_small": "التسجيل في المؤتمر وإرشادات الأبحاث ←",
+    "poster_btn_2026": "صور وتفاصيل مؤتمر 2026 ←",
     "advisory_badge": "تنويه رسمي هام وتحذير أمني ضد الاحتيال (تاريخ 12.05.2026):",
     "advisory_text": "تود الجمعية الطبية العراقية في المملكة المتحدة وأوروبا أن تلفت عناية الزملاء الأطباء في العراق إلى أن هناك جهات غير مخولة تقوم بإرسال دعوات مزورة. نؤكد أنه <em>لا يوجد</em> أي وكيل أو ممثل رسمي للجمعية داخل العراق، وجميع المؤتمرات والعضويات تُدار حصراً عبر موقعنا الرسمي وأمانتنا العامة في لندن.",
     "advisory_link": "قراءة التنويه القانوني الكامل ←",
@@ -380,44 +381,6 @@ function initMobileNav() {
       toggleBtn.setAttribute('aria-expanded', 'false');
     }
   });
-}
-
-/* --------------------------------------------------------------------------
-   AGM 2025 Dynamic Countdown Clock
-   -------------------------------------------------------------------------- */
-function initCountdown() {
-  const countdownEl = document.getElementById('agm-countdown');
-  if (!countdownEl) return;
-
-  const targetDate = new Date('2026-11-14T09:00:00Z').getTime();
-
-  function updateClock() {
-    const now = new Date().getTime();
-    const diff = targetDate - now;
-
-    if (diff <= 0) {
-      countdownEl.innerHTML = '<div class="text-c1gold-500 font-bold p-2">AGM 2025 / 2026 In Session Now</div>';
-      return;
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-    const dEl = document.getElementById('cd-days');
-    const hEl = document.getElementById('cd-hours');
-    const mEl = document.getElementById('cd-mins');
-    const sEl = document.getElementById('cd-secs');
-
-    if (dEl) dEl.textContent = String(days).padStart(2, '0');
-    if (hEl) hEl.textContent = String(hours).padStart(2, '0');
-    if (mEl) mEl.textContent = String(minutes).padStart(2, '0');
-    if (sEl) sEl.textContent = String(seconds).padStart(2, '0');
-  }
-
-  updateClock();
-  setInterval(updateClock, 1000);
 }
 
 /* --------------------------------------------------------------------------
