@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRegistrationForm();
   initPosterFilters();
   initLightbox();
-  initConferenceSelect();
+  initConferenceDropdown();
 });
 
 /* --------------------------------------------------------------------------
@@ -26,6 +26,10 @@ const translations = {
     "nav_home": "Home",
     "nav_about": "About & Governance",
     "nav_agm": "AGM 2025",
+    "nav_conf": "Conference",
+    "nav_conf_short": "AGM",
+    "conf_2026_sub": "35th International Medical Conference · Kingston upon Thames",
+    "conf_2025_sub": "Annual Scientific Conference & AGM",
     "nav_membership": "Membership",
     "nav_education": "Education & CPD",
     "nav_posters": "Posters",
@@ -159,6 +163,10 @@ const translations = {
     "nav_home": "الرئيسية",
     "nav_about": "عن الجمعية",
     "nav_agm": "مؤتمر 2025",
+    "nav_conf": "المؤتمر",
+    "nav_conf_short": "المؤتمر",
+    "conf_2026_sub": "المؤتمر الطبي الدولي الخامس والثلاثون · كينغستون أبون التايمز",
+    "conf_2025_sub": "المؤتمر العلمي السنوي والاجتماع العام",
     "nav_membership": "العضوية",
     "nav_education": "التعليم الطبي",
     "nav_posters": "الملصقات",
@@ -385,13 +393,23 @@ function initMobileNav() {
 }
 
 /* --------------------------------------------------------------------------
-   Conference selector (2026 / 2025): open the chosen conference page
+   Conference drop-down (2026 / 2025): one open at a time, closes on outside click and Escape
    -------------------------------------------------------------------------- */
-function initConferenceSelect() {
-  document.querySelectorAll('.conf-select').forEach((sel) => {
-    sel.addEventListener('change', () => {
-      if (sel.value) window.location.href = sel.value;
-    });
+function initConferenceDropdown() {
+  const dropdowns = document.querySelectorAll('.conf-dd');
+  if (!dropdowns.length) return;
+
+  document.addEventListener('click', (e) => {
+    const inside = e.target.closest('.conf-dd');
+    dropdowns.forEach((d) => { if (d !== inside) d.removeAttribute('open'); });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const open = document.querySelector('.conf-dd[open]');
+    if (!open) return;
+    open.removeAttribute('open');
+    open.querySelector('summary').focus();
   });
 }
 

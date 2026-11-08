@@ -1415,18 +1415,40 @@ html[dir="rtl"] .footer-bottom {
   }
 }
 
-/* ---- conference selector (2026 / 2025): a drop-down in the menu on desktop, beside the menu button on phones ---- */
+/* ---- conference drop-down (2026 / 2025): in the menu on desktop, beside the menu button on phones ---- */
 .nav-conf { display: flex; align-items: center; }
-.conf-select { font: inherit; font-size: 0.8rem; font-weight: 700; line-height: 1.2; color: var(--c-navy-850); background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius-full); padding-block: 0.4rem; padding-inline: 0.8rem 1.8rem; cursor: pointer; flex-shrink: 0; }
-.conf-select:hover { border-color: var(--c-teal-600); }
-.conf-select:focus-visible { outline: 2px solid var(--c-teal-600); outline-offset: 2px; }
+.conf-dd { position: relative; }
+.conf-dd-btn { display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer; list-style: none; user-select: none; }
+.conf-dd-btn::-webkit-details-marker { display: none; }
+.conf-dd-btn::before { content: none; }
+.conf-dd-btn > span::after { content: ""; display: inline-block; width: 0.42rem; height: 0.42rem; margin-inline-start: 0.45rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 0.15s ease; }
+.conf-dd[open] > .conf-dd-btn > span::after { transform: translateY(1px) rotate(-135deg); }
+.conf-dd[open] > .conf-dd-btn { color: var(--c-gold-600); }
+.conf-dd-btn:focus-visible { outline: 2px solid var(--c-teal-600); outline-offset: 3px; border-radius: var(--radius-sm); }
+.conf-dd-menu {
+  position: absolute; top: calc(100% + 0.7rem); inset-inline-start: 0; z-index: 60;
+  min-width: 300px; display: grid; gap: 0.2rem; padding: 0.4rem;
+  background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg);
+}
+.conf-dd-item {
+  display: block; padding: 0.7rem 0.85rem; border-radius: var(--radius-sm); text-decoration: none;
+  color: var(--c-navy-900); border-inline-start: 3px solid transparent; white-space: normal;
+}
+.conf-dd-item strong { display: block; font-size: 1.05rem; line-height: 1.2; }
+.conf-dd-item span { display: block; margin-top: 0.15rem; font-size: 0.78rem; line-height: 1.45; color: var(--c-text-muted); }
+.conf-dd-item:hover, .conf-dd-item:focus-visible { background: var(--c-teal-50); outline: none; }
+.conf-dd-item.active { background: var(--c-teal-50); border-inline-start-color: var(--c-teal-600); }
+/* phones: the drop-down sits in the bar, a compact button with the menu opening towards the page */
+.conf-dd-mobile > .conf-dd-btn { font-size: 0.8rem; padding: 0.45rem 0.7rem; background: #fff; border: 1px solid var(--c-border); border-radius: var(--radius-full); }
+.conf-dd-mobile > .conf-dd-btn.active::after { content: none; }
+.conf-dd-mobile .conf-dd-menu { inset-inline-start: auto; inset-inline-end: 0; min-width: min(300px, calc(100vw - 2rem)); }
 @media (min-width: 1120px) {
-  .conf-select-mobile { display: none; }
+  .conf-dd-mobile { display: none; }
 }
 @media (max-width: 480px) {
   .nav-container { gap: 0.3rem; }
   .brand-ar { display: none; }
   .brand-text h1 { font-size: 0.88rem; }
   .brand-logo { height: 34px; }
-  .conf-select { font-size: 0.72rem; padding-block: 0.3rem; padding-inline: 0.6rem 1.5rem; }
+  .conf-dd-mobile > .conf-dd-btn { font-size: 0.72rem; padding: 0.4rem 0.55rem; }
 }
