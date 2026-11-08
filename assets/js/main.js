@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRegistrationForm();
   initPosterFilters();
   initLightbox();
+  initConferenceSelect();
 });
 
 /* --------------------------------------------------------------------------
@@ -380,6 +381,17 @@ function initMobileNav() {
       drawer.classList.remove('open');
       toggleBtn.setAttribute('aria-expanded', 'false');
     }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Conference selector (2026 / 2025): open the chosen conference page
+   -------------------------------------------------------------------------- */
+function initConferenceSelect() {
+  document.querySelectorAll('.conf-select').forEach((sel) => {
+    sel.addEventListener('change', () => {
+      if (sel.value) window.location.href = sel.value;
+    });
   });
 }
 
